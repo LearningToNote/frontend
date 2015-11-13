@@ -1,0 +1,3 @@
+[submodule "textae"]
+	path = textae
+	url = ../textae.git
