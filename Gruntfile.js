@@ -132,9 +132,10 @@ module.exports = function (grunt) {
     shell: {
       server: {
         options: {
-            stdout: true
+            stdout: true,
+            stderr: true
         },
-        command: 'python textae/server/server.py ../../<%= yeoman.dist %>'
+        command: 'python textae/server/server.py ../../.tmp'
       }
     },
 
@@ -404,6 +405,12 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>'
         }]
       },
+      textae: {
+        expand: true,
+        cwd: 'textae/dist',
+        src: ["*.*", "**/*.*"],
+        dest: '.tmp/textae/'
+      },
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
@@ -475,6 +482,13 @@ module.exports = function (grunt) {
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);
   });
+
+  grunt.registerTask('textae', [
+    'clean:dist',
+    'build-textae',
+    'copy:textae',
+    'shell:server'
+  ])
 
   grunt.registerTask('test', [
     'clean:server',
