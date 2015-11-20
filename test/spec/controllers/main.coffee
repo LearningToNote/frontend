@@ -16,5 +16,5 @@ describe 'Controller: MainCtrl', ->
       # place here mocked dependencies
     }
 
-  it 'should attach a list of awesomeThings to the scope', ->
-    expect(MainCtrl.awesomeThings.length).toBe 3
+  it 'should work', ->
+    expect(!!MainCtrl).toBe true

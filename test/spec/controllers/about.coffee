@@ -16,5 +16,5 @@ describe 'Controller: AboutCtrl', ->
       # place here mocked dependencies
     }
 
-  it 'should attach a list of awesomeThings to the scope', ->
-    expect(AboutCtrl.awesomeThings.length).toBe 3
+  it 'should work', ->
+    expect(!!AboutCtrl).toBe true
