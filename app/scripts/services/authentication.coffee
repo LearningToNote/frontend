@@ -5,15 +5,11 @@ angular.module('frontendApp')
     Authentication = {}
 
     Authentication.login = (credentials) ->
-      deferred = $q.defer()
-      Session.create("Hugo", "Hugo", "admin")
-      deferred.resolve("Hugo")
-      return deferred.promise
       return $http
-        .post('/login', credentials)
+        .post("https://#{location.hostname}:8080/login", credentials)
         .then (res) ->
-          Session.create(res.data.id, res.data.user.id, res.data.user.role)
-          return res.data.user
+          Session.create(res.data.id, res.data.name, 'admin')
+          return res.data
 
     Authentication.isAuthenticated = () ->
       return !!Session.userId
