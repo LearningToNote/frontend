@@ -7,7 +7,7 @@ angular.module('frontendApp')
     Authentication.login = (credentials) ->
       deferred = $q.defer()
       Session.create("Hugo", "Hugo", "admin")
-      deferred.resolve()
+      deferred.resolve("Hugo")
       return deferred.promise
       return $http
         .post('/login', credentials)

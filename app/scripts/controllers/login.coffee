@@ -4,7 +4,7 @@ angular.module('frontendApp')
   .controller 'LoginCtrl', ($scope, $rootScope, Authentication, AUTH_EVENTS) ->
 
     $scope.credentials =
-      username: 'Horst'
+      username: ''
       password: ''
 
     $scope.loginWith = (credentials) ->
