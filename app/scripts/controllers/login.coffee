@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'LoginCtrl', ($scope, $rootScope, Authentication, AUTH_EVENTS) ->
+  .controller 'LoginCtrl', ($scope, $rootScope, Authentication, AUTH_EVENTS, $location) ->
 
     $scope.credentials =
       username: ''
@@ -12,6 +12,7 @@ angular.module('frontendApp')
         (user) ->
           $rootScope.$broadcast AUTH_EVENTS.loginSuccess
           $scope.$parent.setCurrentUser user
+          $location.url("/")
         () ->
           $rootScope.$broadcast AUTH_EVENTS.loginFailed
       )
