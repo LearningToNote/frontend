@@ -135,7 +135,7 @@ module.exports = function (grunt) {
             stdout: true,
             stderr: true
         },
-        command: 'python textae/server/server.py ../../.tmp'
+        command: 'python textae/server/server.py ../../<%= yeoman.dist %>'
       }
     },
 
@@ -409,7 +409,7 @@ module.exports = function (grunt) {
         expand: true,
         cwd: 'textae/dist',
         src: ["*.*", "**/*.*"],
-        dest: '.tmp/textae/'
+        dest: '<%= yeoman.dist %>/textae/'
       },
       styles: {
         expand: true,
@@ -484,7 +484,6 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('textae', [
-    'clean:dist',
     'build-textae',
     'copy:textae',
     'shell:server'
@@ -514,7 +513,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'textae'
   ]);
 
   grunt.registerTask('default', [
