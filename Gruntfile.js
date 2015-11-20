@@ -1,4 +1,4 @@
-// Generated on 2015-11-13 using generator-angular 0.12.1
+// Generated on 2015-11-20 using generator-angular 0.14.0
 'use strict';
 
 // # Globbing
@@ -129,16 +129,6 @@ module.exports = function (grunt) {
       }
     },
 
-    shell: {
-      server: {
-        options: {
-            stdout: true,
-            stderr: true
-        },
-        command: 'python textae/server/server.py ../../<%= yeoman.dist %>'
-      }
-    },
-
     // Empties folders to start fresh
     clean: {
       dist: {
@@ -157,6 +147,7 @@ module.exports = function (grunt) {
     // Add vendor prefixed styles
     postcss: {
       options: {
+        processors: [
           require('autoprefixer-core')({browsers: ['last 1 version']})
         ]
       },
@@ -205,7 +196,7 @@ module.exports = function (grunt) {
           }
           }
       }
-    },
+    }, 
 
     // Compiles CoffeeScript to JavaScript
     coffee: {
@@ -405,12 +396,6 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>'
         }]
       },
-      textae: {
-        expand: true,
-        cwd: 'textae/dist',
-        src: ["*.*", "**/*.*"],
-        dest: '<%= yeoman.dist %>/textae/'
-      },
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
@@ -467,28 +452,6 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
-  grunt.registerTask('build-textae', function() {
-    var cb = this.async();
-    var child = grunt.util.spawn({
-        grunt: true,
-        args: ['build'],
-        opts: {
-            cwd: 'textae/'
-        }
-    }, function(error, result, code) {
-        cb();
-    });
-
-    child.stdout.pipe(process.stdout);
-    child.stderr.pipe(process.stderr);
-  });
-
-  grunt.registerTask('textae', [
-    'build-textae',
-    'copy:textae',
-    'shell:server'
-  ])
-
   grunt.registerTask('test', [
     'clean:server',
     'wiredep',
@@ -513,8 +476,7 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin',
-    'textae'
+    'htmlmin'
   ]);
 
   grunt.registerTask('default', [
