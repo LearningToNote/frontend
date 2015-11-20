@@ -39,7 +39,7 @@ module.exports = function (grunt) {
       },
       coffee: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['newer:coffee:dist']
+        tasks: ['newer:coffee:dist', 'karma']
       },
       coffeeTest: {
         files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
@@ -196,7 +196,7 @@ module.exports = function (grunt) {
           }
           }
       }
-    }, 
+    },
 
     // Compiles CoffeeScript to JavaScript
     coffee: {
