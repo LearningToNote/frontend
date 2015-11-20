@@ -1,20 +1,20 @@
 'use strict'
 
-describe 'Controller: LoginCtrl', ->
+describe 'Controller: ApplicationCtrl', ->
 
   # load the controller's module
   beforeEach module 'frontendApp'
 
-  LoginCtrl = {}
+  ApplicationCtrl = {}
 
   scope = {}
 
   # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
-    LoginCtrl = $controller 'LoginCtrl', {
+    ApplicationCtrl = $controller 'ApplicationCtrl', {
       $scope: scope
     }
 
   it 'should work', ->
-    expect(!!LoginCtrl).toBe true
+    expect(!!ApplicationCtrl).toBe true
