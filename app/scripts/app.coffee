@@ -25,6 +25,14 @@ angular
         templateUrl: 'views/login.html'
         controller: 'LoginCtrl'
         controllerAs: 'login'
+      .when '/users',
+        templateUrl: 'views/users.html'
+        controller: 'UsersCtrl'
+        controllerAs: 'users'
+      .when '/users/:id',
+        templateUrl: 'views/userdetails.html'
+        controller: 'UserDetailsCtrl'
+        controllerAs: 'userDetails'
       .otherwise
         redirectTo: '/'
   .run ($rootScope, AUTH_EVENTS, Authentication, $location) ->
