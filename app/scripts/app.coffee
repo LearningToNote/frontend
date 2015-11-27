@@ -7,7 +7,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'routeStyles'
   ])
   .config ($routeProvider, USER_ROLES) ->
     $routeProvider
@@ -29,6 +30,7 @@ angular
         templateUrl: 'views/users.html'
         controller: 'UsersCtrl'
         controllerAs: 'users'
+        css: 'styles/users.css'
       .when '/users/:id',
         templateUrl: 'views/userdetails.html'
         controller: 'UserDetailsCtrl'

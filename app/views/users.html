@@ -1,1 +1,8 @@
-<p>This is the users view.</p>
+<h3>Users</h3>
+
+<ul class="user-list" ng-repeat="user in users">
+    <li class="user flex-container">
+        <div class="user-id">{{user.id}}</div>
+        <div class="user-name flex-item">{{user.name}}</div>
+    </li>
+</ul>
