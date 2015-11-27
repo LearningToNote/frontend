@@ -1,1 +1,22 @@
-<p>This is the userDetails view.</p>
+<div ng-show="user">
+    <h3>{{user.name}}</h3>
+    <h4>Documents:</h4>
+    <div class="document-list" ng-show="documents" ng-repeat="document in documents">
+        <div class="user flex-container">
+            <div class="document-id">{{document.id}}</div>
+            <div class="user-id">{{document.user_id}}</div>
+            <div class="created-at">{{document.created_at}}</div>
+            <div class="updated-at">{{document.updated_at}}</div>
+            <div class="flex-item"></div>
+            <a class="document-actions" ng-click="showDocument(document)">
+                Show
+            </a>
+        </div>
+    </div>
+    <div ng-hide="documents">
+        There are no documents for this user.
+    </div>
+</div>
+<div ng-hide="user">
+    There is no data about this user available.
+</div>

@@ -31,10 +31,13 @@ angular
         controller: 'UsersCtrl'
         controllerAs: 'users'
         css: 'styles/users.css'
+        data:
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
       .when '/users/:id',
         templateUrl: 'views/userdetails.html'
         controller: 'UserDetailsCtrl'
         controllerAs: 'userDetails'
+        css: 'styles/userDetails.css'
       .otherwise
         redirectTo: '/'
   .run ($rootScope, AUTH_EVENTS, Authentication, $location) ->

@@ -1,0 +1,23 @@
+div.document-id {
+    min-width: 250px;
+}
+
+div.user-id {
+    min-width: 150px;
+}
+
+div.created-at {
+    min-width: 200px;
+}
+
+div.updated-at {
+    min-width: 200px;
+}
+
+div.document-list:nth-child(odd) {
+    background-color: #CCC;
+}
+
+div.user {
+    padding: 5px;
+}

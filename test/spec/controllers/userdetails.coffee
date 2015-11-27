@@ -13,7 +13,7 @@ describe 'Controller: UserDetailsCtrl', ->
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     UserDetailsCtrl = $controller 'UserDetailsCtrl', {
-      # place here mocked dependencies
+      $scope: scope
     }
 
   it 'should work', ->
