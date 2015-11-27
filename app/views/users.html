@@ -3,6 +3,6 @@
 <ul class="user-list" ng-repeat="user in users">
     <li class="user flex-container">
         <div class="user-id">{{user.id}}</div>
-        <div class="user-name flex-item">{{user.name}}</div>
+        <a ng-href="#/users/{{user.id}}" class="user-name flex-item">{{user.name}}</a>
     </li>
 </ul>
