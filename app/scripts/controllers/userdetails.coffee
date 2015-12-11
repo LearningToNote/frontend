@@ -20,7 +20,7 @@ angular.module('frontendApp')
 
 
     $scope.showDocument = (document) ->
-      landingUrl = "/dist/textae/textae.html?mode=edit&hana-document=#{document.id}"
+      landingUrl = "/dist/textae/textae.html?mode=edit&hana-document=#{document.document_id}"
       $window.location.href = SERVER_URL + landingUrl
 
     return
