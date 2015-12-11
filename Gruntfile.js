@@ -151,7 +151,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      textae: '<%= yeoman.dist %>/textae/{,*/}*'
     },
 
     // Add vendor prefixed styles
@@ -482,6 +483,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('textae', [
+    'clean:textae',
     'build-textae',
     'copy:textae',
     'shell:server'
