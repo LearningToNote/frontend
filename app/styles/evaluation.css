@@ -1,0 +1,32 @@
+.eval-label {
+    min-width: 200px;
+    font-weight: bold;
+}
+
+.padded {
+    padding: 5px;
+}
+
+.form-control {
+    max-width: 400px;
+}
+
+h4 {
+    margin-top: 30px;
+}
+
+div.matches {
+    color: green;
+}
+
+div.semi-matches {
+    color: blue;
+}
+
+div.type-mismatches {
+    color: orange;
+}
+
+div.misses {
+    color: red;
+}

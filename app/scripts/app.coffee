@@ -38,6 +38,13 @@ angular
         controller: 'UserDetailsCtrl'
         controllerAs: 'userDetails'
         css: 'styles/userDetails.css'
+        data:
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+      .when '/evaluate',
+        templateUrl: 'views/evaluation.html'
+        controller: 'EvaluationCtrl'
+        controllerAs: 'evaluation'
+        css: 'styles/evaluation.css'
       .otherwise
         redirectTo: '/'
   .run ($rootScope, AUTH_EVENTS, Authentication, $location) ->

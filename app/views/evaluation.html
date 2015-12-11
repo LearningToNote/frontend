@@ -1,0 +1,46 @@
+<h3>Evaluate Annotator Performance</h3>
+<div ng-show="documents">
+    <h4>Parameters</h4>
+    <div class="padded flex-container">
+        <div class="padded eval-label">Document:</div>
+        <select class="form-control" ng-model="documentId" ng-options="document for document in documents"/>
+    </div>
+    <div class="padded flex-container">
+        <div class="padded eval-label">User 1:</div>
+        <select class="form-control" ng-model="user1" ng-options="user.id for user in users"/>
+    </div>
+    <div class="padded flex-container">
+        <div class="padded eval-label">User 2:</div>
+        <select class="form-control" ng-model="user2" ng-options="user.id for user in users"/>
+    </div>
+    <button class="btn btn-default" ng-click="evaluate()">
+        Evaluate
+    </button>
+</div>
+<div ng-show="results">
+    <h4>Results</h4>
+    <div class="padded flex-container">
+        <div class="padded eval-label">Matches:</div>
+        <div class="padded matches">{{results['matches']}}</div>
+    </div>
+    <div class="padded flex-container">
+        <div class="padded eval-label">Left-Align-Matches:</div>
+        <div class="padded semi-matches">{{results['left-aligns']}}</div>
+    </div>
+    <div class="padded flex-container">
+        <div class="padded eval-label">Right-Align-Matches:</div>
+        <div class="padded semi-matches">{{results['right-aligns']}}</div>
+    </div>
+    <div class="padded flex-container">
+        <div class="padded eval-label">Overlapping Matches:</div>
+        <div class="padded semi-matches">{{results['overlaps']}}</div>
+    </div>
+    <div class="padded flex-container">
+        <div class="padded eval-label">Type mismatch:</div>
+        <div class="padded type-mismatches">{{results['wrong-type']}}</div>
+    </div>
+    <div class="padded flex-container">
+        <div class="padded eval-label">Misses:</div>
+        <div class="padded misses">{{results['misses']}}</div>
+    </div>
+</div>
