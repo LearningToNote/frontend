@@ -412,7 +412,7 @@ module.exports = function (grunt) {
         expand: true,
         cwd: 'textae/dist',
         src: ["*.*", "**/*.*"],
-        dest: '<%= yeoman.dist %>/textae/'
+        dest: '<%= yeoman.dist %>/'
       },
       styles: {
         expand: true,
