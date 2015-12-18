@@ -21,26 +21,44 @@
     <h4>Results</h4>
     <div class="padded flex-container">
         <div class="padded eval-label">Matches:</div>
-        <div class="padded matches">{{results['matches']}}</div>
+        <div class="padded matches">
+            <span ng-bind="results['matches']"></span>
+            (<span ng-bind="percentOfWhole(results['matches'])"></span>%)
+        </div>
     </div>
     <div class="padded flex-container">
         <div class="padded eval-label">Left-Align-Matches:</div>
-        <div class="padded semi-matches">{{results['left-aligns']}}</div>
+        <div class="padded semi-matches">
+            <span ng-bind="results['left-aligns']"></span>
+            (<span ng-bind="percentOfWhole(results['left-aligns'])"></span>%)
+        </div>
     </div>
     <div class="padded flex-container">
         <div class="padded eval-label">Right-Align-Matches:</div>
-        <div class="padded semi-matches">{{results['right-aligns']}}</div>
+        <div class="padded semi-matches">
+            <span ng-bind="results['right-aligns']"></span>
+            (<span ng-bind="percentOfWhole(results['right-aligns'])"></span>%)
+        </div>
     </div>
     <div class="padded flex-container">
         <div class="padded eval-label">Overlapping Matches:</div>
-        <div class="padded semi-matches">{{results['overlaps']}}</div>
+        <div class="padded semi-matches">
+            <span ng-bind="results['overlaps']"></span>
+            (<span ng-bind="percentOfWhole(results['overlaps'])"></span>%)
+        </div>
     </div>
     <div class="padded flex-container">
         <div class="padded eval-label">Type mismatch:</div>
-        <div class="padded type-mismatches">{{results['wrong-type']}}</div>
+        <div class="padded type-mismatches">
+            <span ng-bind="results['wrong-type']"></span>
+            (<span ng-bind="percentOfWhole(results['wrong-type'])"></span>%)
+        </div>
     </div>
     <div class="padded flex-container">
         <div class="padded eval-label">Misses:</div>
-        <div class="padded misses">{{results['misses']}}</div>
+        <div class="padded misses">
+            <span ng-bind="results['misses']"></span>
+            (<span ng-bind="percentOfWhole(results['misses'])"></span>%)
+        </div>
     </div>
 </div>
