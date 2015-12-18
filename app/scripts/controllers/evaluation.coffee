@@ -35,8 +35,9 @@ angular.module('frontendApp')
         )
             .then (response) ->
                 $scope.results = response.data
-                $scope.sum = $scope.results['matches'] + $scope.results['left-aligns'] + $scope.results['right-aligns'] +
-                    $scope.results['overlaps'] + $scope.results['misses'] + $scope.results['wrong-type']
+                $scope.sum = $scope.results['matches'] +
+                    $scope.results['left-aligns'] + $scope.results['right-aligns'] +
+                    $scope.results['overlaps'] + $scope.results['misses']
 
     $scope.percentOfWhole = (value) ->
         return (100.0 / $scope.sum * value).toFixed(2)
