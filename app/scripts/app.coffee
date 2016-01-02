@@ -9,7 +9,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'routeStyles',
-    'angularFileUpload'
+    'ngFile'
   ])
   .config ($routeProvider, USER_ROLES) ->
     $routeProvider
@@ -48,6 +48,9 @@ angular
         css: 'styles/evaluation.css'
       .otherwise
         redirectTo: '/'
+  .config(['$httpProvider', ($httpProvider) ->
+    $httpProvider.defaults.withCredentials = true
+  ])
   .run ($rootScope, AUTH_EVENTS, Authentication, $location) ->
     $rootScope.$on '$routeChangeStart', (event, next) ->
       return if not next.data

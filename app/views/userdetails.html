@@ -20,15 +20,8 @@
     </div>
     <div class="flex-container" id="upload-container">
         <div class="flex-item"></div>
-        <input type="file" nv-file-select uploader="uploader" id="file-upload"/>
-        <div>
-            <ul>
-                <li ng-repeat="item in uploader.queue">
-                    Name: <span ng-bind="item.file.name"></span><br/>
-                    <button ng-click="item.upload()">upload</button>
-                </li>
-            </ul>
-        </div>
+        <input type="file" file="files" id="file-upload">
+        <button ng-click="upload()">upload</button>
     </div>
 </div>
 <div ng-hide="user">
