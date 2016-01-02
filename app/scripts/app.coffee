@@ -57,6 +57,8 @@ angular
       authorizedRoles = next.data.authorizedRoles
       Authentication.isAuthorized(authorizedRoles).then(
         (success) ->
+          return
+        (failure) ->
           event.preventDefault()
           Authentication.isAuthenticated().then(
             (success) ->
