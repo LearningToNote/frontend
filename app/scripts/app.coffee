@@ -55,10 +55,14 @@ angular
     $rootScope.$on '$routeChangeStart', (event, next) ->
       return if not next.data
       authorizedRoles = next.data.authorizedRoles
-      if not Authentication.isAuthorized(authorizedRoles)
-        event.preventDefault()
-        if Authentication.isAuthenticated()
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized)
-        else
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
-          $location.url("/login")
+      Authentication.isAuthorized(authorizedRoles).then(
+        (success) ->
+          event.preventDefault()
+          Authentication.isAuthenticated().then(
+            (success) ->
+              $rootScope.$broadcast(AUTH_EVENTS.notAuthorized)
+            (failure) ->
+              $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
+              $location.url("/login")
+          )
+      )

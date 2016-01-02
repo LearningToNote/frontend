@@ -11,7 +11,6 @@ angular.module('frontendApp')
       Authentication.login(credentials).then(
         (user) ->
           $rootScope.$broadcast AUTH_EVENTS.loginSuccess
-          $scope.$parent.setCurrentUser user
           $location.url("/")
         () ->
           $rootScope.$broadcast AUTH_EVENTS.loginFailed

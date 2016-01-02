@@ -1,13 +1,10 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'ApplicationCtrl', ($scope, USER_ROLES, Authentication) ->
+  .controller 'ApplicationCtrl', ($scope, USER_ROLES, Authentication, Session) ->
 
-    $scope.currentUser = null
+    $scope.session = Session
     $scope.userRoles = USER_ROLES
     $scope.isAuthorized = Authentication.isAuthorized
-
-    $scope.setCurrentUser = (user) ->
-      $scope.currentUser = user
 
     return
