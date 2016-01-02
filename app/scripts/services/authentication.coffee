@@ -13,6 +13,10 @@ angular.module('frontendApp')
           Session.create(res.data.id, res.data.name, 'admin')
           return res.data
 
+    Authentication.logout = () ->
+      $http.get(SERVER_URL + "/logout").then () ->
+        Session.destroy()
+
     Authentication.isAuthenticated = () ->
       deferred = $q.defer()
       if !!Session.id
