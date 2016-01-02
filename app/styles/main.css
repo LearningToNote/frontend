@@ -13,6 +13,11 @@
   flex-grow: 1;
 }
 
+#user-badge {
+  padding-top: 15px;
+  margin-right: -15px;
+}
+
 #logout {
   cursor: pointer;
 }

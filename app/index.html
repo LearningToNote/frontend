@@ -42,7 +42,7 @@
             </ul>
             <div class="flex-container">
               <div class="flex-item"></div>
-              <div ng-show="session.id">
+              <div ng-show="session.id" id="user-badge">
                 Welcome, <a ng-href="#/users/{{session.id}}">{{session.name}}</a> (<a id="logout" ng-click="logout()">logout</a>)
               </div>
             </div>
