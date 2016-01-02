@@ -46,6 +46,8 @@ angular
         controller: 'EvaluationCtrl'
         controllerAs: 'evaluation'
         css: 'styles/evaluation.css'
+        data:
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
       .otherwise
         redirectTo: '/'
   .config(['$httpProvider', ($httpProvider) ->
