@@ -8,7 +8,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'routeStyles'
+    'routeStyles',
+    'angularFileUpload'
   ])
   .config ($routeProvider, USER_ROLES) ->
     $routeProvider

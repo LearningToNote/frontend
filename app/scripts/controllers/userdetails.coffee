@@ -1,9 +1,12 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'UserDetailsCtrl', ($scope, $http, $routeParams, $window) ->
+  .controller 'UserDetailsCtrl', ($scope, $http, $routeParams, $window, FileUploader) ->
 
     SERVER_URL = "https://#{location.hostname}:8080"
+
+    $scope.uploader = new FileUploader()
+    $scope.uploader.headers = {"Content-Type": "application/json"}
 
     $scope.user = undefined
     $scope.documents = undefined

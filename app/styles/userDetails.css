@@ -18,8 +18,17 @@ a.document-actions {
     cursor: pointer;
 }
 
-div.document-list:nth-child(odd) {
+div.documents {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+div.document:nth-child(odd) {
     background-color: #CCC;
+}
+
+div#upload-container {
+    margin-top: 10px;
 }
 
 div.user {
