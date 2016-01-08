@@ -11,18 +11,27 @@ angular.module('frontendApp')
 
     userId = $routeParams.id
 
-    $http.get(SERVER_URL + "/users/" + userId)
-      .then (response) ->
-        $scope.user = response.data
+    $scope.refreshUser = () ->
+      $http.get(SERVER_URL + "/users/" + userId)
+        .then (response) ->
+          $scope.user = response.data
 
-    $http.get(SERVER_URL + "/user_documents/" + userId)
-      .then (response) ->
-        $scope.documents = response.data
+    $scope.refreshUserDocuments = () ->
+      $http.get(SERVER_URL + "/user_documents/" + userId)
+        .then (response) ->
+          $scope.documents = response.data
 
 
-    $scope.showDocument = (document) ->
-      landingUrl = "/dist/textae/textae.html?mode=edit&hana-document=#{document.document_id}"
+    $scope.showDocument = (doc) ->
+      landingUrl = "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}"
       $window.location.href = SERVER_URL + landingUrl
+
+    $scope.deleteDocument = (doc) ->
+      req =
+        method: 'DELETE'
+        url: SERVER_URL + '/documents/' + doc.document_id
+      $http(req).then () ->
+        $scope.refreshUserDocuments()
 
     $scope.upload = () ->
       for file in $scope.files
@@ -35,7 +44,10 @@ angular.module('frontendApp')
             'document_id': file.name
             'text': file.body
             'visibility': 1
-        $http(req).then (response) ->
-          console.log response
+        $http(req).then () ->
+          $scope.refreshUserDocuments()
+
+    $scope.refreshUser()
+    $scope.refreshUserDocuments()
 
     return

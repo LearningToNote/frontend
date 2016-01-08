@@ -9,6 +9,9 @@
                 <div class="created-at">{{document.created_at}}</div>
                 <div class="updated-at">{{document.updated_at}}</div>
                 <div class="flex-item"></div>
+                <a class="document-actions" ng-click="deleteDocument(document)">
+                    Delete
+                </a>
                 <a class="document-actions" ng-click="showDocument(document)">
                     Show
                 </a>

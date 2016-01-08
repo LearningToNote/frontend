@@ -16,6 +16,7 @@ div.updated-at {
 
 a.document-actions {
     cursor: pointer;
+    margin-left: 5px;
 }
 
 div.documents {
