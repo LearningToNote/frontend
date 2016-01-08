@@ -50,8 +50,8 @@
     <div class="padded flex-container">
         <div class="padded eval-label">Type mismatch:</div>
         <div class="padded type-mismatches">
-            <span ng-bind="wrongTypeSum"></span>
-            [<span class="wrong-type-summary" ng-repeat="(key, value) in wrongType">{{key}}: {{value}}</span>]
+            <span ng-bind="results['wrong-type']"></span>
+            (<span ng-bind="percentOfWhole(results['wrong-type'])"></span>%)
         </div>
     </div>
     <div class="padded flex-container">

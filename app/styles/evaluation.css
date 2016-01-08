@@ -30,8 +30,3 @@ div.type-mismatches {
 div.misses {
     color: red;
 }
-
-span.wrong-type-summary {
-    margin-right: 5px;
-    margin-left: 5px;
-}
