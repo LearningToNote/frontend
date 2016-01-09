@@ -1,1 +1,24 @@
-<p>This is the about view.</p>
+<div class="jumbotron">
+  <div class="flex-container">
+    <h1>Learning To Note</h1>
+    <div class="flex-item"></div>
+    <img src="images/hpi.png" id ="jumbo-logo">
+  </div>
+  <p class="lead">
+    Intelligent Support for Document Annotation using Semi-Supervised Learning
+  </p>
+</div>
+<div id="abstract">
+  <p>
+  The goal of this master project is to develop a system to support manual annotation of documents and linking of entities to database records. Manual annotation of textual documents is often necessary for building corpora to support training and evaluation of natural language processing applications. For instance, corpora have been developed for the extraction of a variety of entities, e.g., genes/proteins, as well as relationships, e.g., protein-protein interactions. Although there are many tools for document annotation, they do not suggest pre-annotations based on text mining and machine learning and do not provide real-time learning.
+  </p>
+  <p>
+  Curation tools support extracting data from text collections for a certain topic. For instance, biological databases need to extract precise information from publications, which are further stored into their databases and made available to the users via a Web interface. This is a time-consuming and complex task which requires careful reading of many publications.
+  </p>
+  <p>
+  For performance purposes, the tool will be built on top of the SAP HANA in-memory database, given its potential for processing large datasets in real-time and its built-in text analysis functionalities. Interaction of the users with the system will be carried out by uploading a document or a collection of documents. The system will include a text mining pipeline for automatic processing of documents and suggestion of annotations. This pipeline will contain the following components: recognition of pre-defined entity types and extraction of pre-defined relationships between two or more entity types.
+  </p>
+  <p>
+  Further, ongoing annotations will be used for active learning of user preferences, for updating predictions of annotations and indicating which document to annotate next. This learning process will rely on existing machine learning algorithms implemented in the SAP HANA database, which will need to be adapted for on-line learning. Implementation of state-of-the-art on-line learning algorithms will also be considered.
+  </p>
+</div>

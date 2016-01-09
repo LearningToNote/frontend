@@ -16,10 +16,20 @@ div.updated-at {
 
 a.document-actions {
     cursor: pointer;
+    margin-left: 5px;
 }
 
-div.document-list:nth-child(odd) {
-    background-color: #CCC;
+div.documents {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+div.document:nth-child(odd) {
+    background-color: #f8f8f8;
+}
+
+div#upload-container {
+    margin-top: 10px;
 }
 
 div.user {

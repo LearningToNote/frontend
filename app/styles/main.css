@@ -12,3 +12,28 @@
 .flex-item {
   flex-grow: 1;
 }
+
+#user-badge {
+  padding-top: 15px;
+  margin-right: -15px;
+}
+
+#logout {
+  cursor: pointer;
+}
+
+#logo {
+  width: 30px;
+  height: 30px;
+  margin-top: -5px;
+  margin-right: 10px;
+}
+
+#jumbo-logo {
+  width: 100px;
+  height: 100px;
+}
+
+#abstract {
+  text-align: justify;
+}

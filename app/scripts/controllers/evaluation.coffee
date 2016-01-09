@@ -13,6 +13,9 @@ angular.module('frontendApp')
     $scope.documentId = undefined
 
     $scope.results = undefined
+    $scope.sum = undefined
+    $scope.wrongType = undefined
+    $scope.wrongTypeSum = undefined
 
     $http.get(SERVER_URL + "/documents")
         .then (response) ->
@@ -34,5 +37,16 @@ angular.module('frontendApp')
         )
             .then (response) ->
                 $scope.results = response.data
+                $scope.sum = $scope.results['matches'] +
+                    $scope.results['left-aligns'] + $scope.results['right-aligns'] +
+                    $scope.results['overlaps'] + $scope.results['misses']
+                $scope.wrongType = $scope.results['wrong-type']
+                $scope.wrongTypeSum = ($scope.wrongType['matches'] or 0) +
+                    ($scope.wrongType['right-aligns'] or 0) +
+                    ($scope.wrongType['left-aligns'] or 0) +
+                    ($scope.wrongType['overlaps'] or 0)
+
+    $scope.percentOfWhole = (value) ->
+        return (100.0 / $scope.sum * value).toFixed(2)
 
     return

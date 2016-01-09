@@ -8,7 +8,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'routeStyles'
+    'routeStyles',
+    'ngFile'
   ])
   .config ($routeProvider, USER_ROLES) ->
     $routeProvider
@@ -45,16 +46,27 @@ angular
         controller: 'EvaluationCtrl'
         controllerAs: 'evaluation'
         css: 'styles/evaluation.css'
+        data:
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
       .otherwise
         redirectTo: '/'
+  .config(['$httpProvider', ($httpProvider) ->
+    $httpProvider.defaults.withCredentials = true
+  ])
   .run ($rootScope, AUTH_EVENTS, Authentication, $location) ->
     $rootScope.$on '$routeChangeStart', (event, next) ->
       return if not next.data
       authorizedRoles = next.data.authorizedRoles
-      if not Authentication.isAuthorized(authorizedRoles)
-        event.preventDefault()
-        if Authentication.isAuthenticated()
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized)
-        else
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
-          $location.url("/login")
+      Authentication.isAuthorized(authorizedRoles).then(
+        (success) ->
+          return
+        (failure) ->
+          event.preventDefault()
+          Authentication.isAuthenticated().then(
+            (success) ->
+              $rootScope.$broadcast(AUTH_EVENTS.notAuthorized)
+            (failure) ->
+              $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
+              $location.url("/login")
+          )
+      )

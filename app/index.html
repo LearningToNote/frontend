@@ -31,7 +31,10 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">Learning To Note</a>
+            <a class="navbar-brand flex-container" href="#/">
+              <img src="images/hpi.png" id="logo">
+              Learning To Note
+            </a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -42,8 +45,8 @@
             </ul>
             <div class="flex-container">
               <div class="flex-item"></div>
-              <div ng-show="currentUser">
-                Welcome, <a ng-href="#/users/{{currentUser.id}}">{{currentUser.name}}</a>.
+              <div ng-show="session.id" id="user-badge">
+                Welcome, <a ng-href="#/users/{{session.id}}">{{session.name}}</a> (<a id="logout" ng-click="logout()">logout</a>)
               </div>
             </div>
           </div>
@@ -73,6 +76,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route-styles/route-styles.js"></script>
+    <script src="bower_components/angular-file-directive/angular-file-directive.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
