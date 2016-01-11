@@ -21,7 +21,6 @@ angular.module('frontendApp')
         .then (response) ->
           $scope.documents = response.data
 
-
     $scope.showDocument = (doc) ->
       landingUrl = "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}"
       $window.location.href = SERVER_URL + landingUrl
@@ -30,6 +29,18 @@ angular.module('frontendApp')
       req =
         method: 'DELETE'
         url: SERVER_URL + '/documents/' + doc.document_id
+      $http(req).then () ->
+        $scope.refreshUserDocuments()
+
+    $scope.predictDocument = (doc) ->
+      req =
+        method: 'POST'
+        url: SERVER_URL + '/predict'
+        headers:
+          'Content-Type': 'application/json'
+        data:
+          'user_id': doc['user_id']
+          'document_id': doc['document_id']
       $http(req).then () ->
         $scope.refreshUserDocuments()
 
