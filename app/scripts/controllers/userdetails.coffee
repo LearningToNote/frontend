@@ -28,7 +28,7 @@ angular.module('frontendApp')
     $scope.deleteDocument = (doc) ->
       req =
         method: 'DELETE'
-        url: SERVER_URL + '/documents/' + doc.document_id
+        url: SERVER_URL + '/user_documents/' + doc.id
       $http(req).then () ->
         $scope.refreshUserDocuments()
 
