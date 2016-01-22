@@ -50,3 +50,12 @@ img#user-image {
     width: auto;
     height: auto;
 }
+
+span.upload-label {
+    margin-right: 10px;
+}
+
+input.upload-input {
+    width: 300px;
+    margin-right: 10px;
+}

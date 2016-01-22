@@ -9,6 +9,8 @@ angular.module('frontendApp')
     $scope.documents = undefined
     $scope.files = []
 
+    $scope.pubmedId = undefined
+
     userId = $routeParams.id
 
     $scope.refreshUser = () ->
@@ -46,19 +48,28 @@ angular.module('frontendApp')
       $http(req).then () ->
         $scope.refreshUserDocuments()
 
+    uploadDocument = (name, content) ->
+      req =
+        method: 'POST'
+        url: SERVER_URL + '/import'
+        headers:
+          'Content-Type': 'application/json'
+        data:
+          'document_id': name
+          'text': content
+          'visibility': 1
+      $http(req).then () ->
+        $scope.refreshUserDocuments()
+
     $scope.upload = () ->
       for file in $scope.files
-        req =
-          method: 'POST'
-          url: SERVER_URL + '/import'
-          headers:
-            'Content-Type': 'application/json'
-          data:
-            'document_id': file.name
-            'text': file.body
-            'visibility': 1
-        $http(req).then () ->
-          $scope.refreshUserDocuments()
+        uploadDocument(file.name, file.body)
+      $scope.files = []
+
+    $scope.uploadFromPubmed = () ->
+      $http.get(SERVER_URL + '/pubmed/' + $scope.pubmedId).then (response) ->
+        uploadDocument('pubmed_' + $scope.pubmedId, response.data)
+        $scope.pubmedId = undefined
 
     $scope.refreshUser()
     $scope.refreshUserDocuments()
