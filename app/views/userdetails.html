@@ -1,5 +1,11 @@
 <div ng-show="user">
-    <h3>{{user.name}}</h3>
+    <div class="flex-container overview">
+        <img ng-src="{{user.image}}" id="user-image">
+        <div id="account-details">
+            <h3>{{user.name}}</h3>
+            <h4>{{user.description}}</h4>
+        </div>
+    </div>
     <h4>Documents:</h4>
     <div class="documents" nv-file-drop uploader="uploader">
         <div class="document" ng-show="documents" ng-repeat="document in documents">

@@ -15,6 +15,8 @@ angular.module('frontendApp')
       $http.get(SERVER_URL + "/users/" + userId)
         .then (response) ->
           $scope.user = response.data
+          if not $scope.user.image
+            $scope.user.image = "images/user.png"
 
     $scope.refreshUserDocuments = () ->
       $http.get(SERVER_URL + "/user_documents/" + userId)
@@ -28,7 +30,7 @@ angular.module('frontendApp')
     $scope.deleteDocument = (doc) ->
       req =
         method: 'DELETE'
-        url: SERVER_URL + '/documents/' + doc.document_id
+        url: SERVER_URL + '/user_documents/' + doc.id
       $http(req).then () ->
         $scope.refreshUserDocuments()
 

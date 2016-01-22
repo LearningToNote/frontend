@@ -35,3 +35,18 @@ div#upload-container {
 div.user {
     padding: 5px;
 }
+
+div.overview {
+    margin-bottom: 50px;
+}
+
+div#account-details {
+    margin-left: 20px;
+}
+
+img#user-image {
+    max-width: 150px;
+    max-height: 150px;
+    width: auto;
+    height: auto;
+}
