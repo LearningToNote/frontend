@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'UserDetailsCtrl', ($scope, $http, $routeParams, $window) ->
+  .controller 'UserDetailsCtrl', ($scope, $http, $routeParams, $window, Session) ->
 
     SERVER_URL = "https://#{location.hostname}:8080"
 
@@ -11,12 +11,15 @@ angular.module('frontendApp')
 
     $scope.pubmedId = undefined
 
+    $scope.Session = Session
+
     userId = $routeParams.id
 
     $scope.refreshUser = () ->
       $http.get(SERVER_URL + "/users/" + userId)
         .then (response) ->
           $scope.user = response.data
+          console.log $scope.user
           if not $scope.user.image
             $scope.user.image = "images/user.png"
 

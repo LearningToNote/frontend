@@ -28,15 +28,15 @@
         </div>
     </div>
     <div ng-hide="documents">
-        There are no documents for this user.
+        There are no documents for this user. Maybe you are not authorized to view them.
     </div>
-    <div class="flex-container" id="upload-container">
+    <div class="flex-container" id="upload-container" ng-show="user.id == Session.id">
         <div class="flex-item"></div>
         <span class="upload-label">Local file upload:</span>
         <input class="upload-input" type="file" file="files" id="file-upload">
         <button ng-click="upload()">upload</button>
     </div>
-    <div class="flex-container" id="pubmed-upload">
+    <div class="flex-container" id="pubmed-upload" ng-show="user.id == Session.id">
         <div class="flex-item"></div>
         <span class="upload-label">PubMed import:</span>
         <input class="upload-input" ng-model="pubmedId" placeholder="PMID">
