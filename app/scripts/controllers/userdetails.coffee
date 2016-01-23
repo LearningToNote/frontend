@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'UserDetailsCtrl', ($scope, $http, $routeParams, $window) ->
+  .controller 'UserDetailsCtrl', ($scope, $http, $routeParams, $window, Session) ->
 
     SERVER_URL = "https://#{location.hostname}:8080"
 
@@ -9,12 +9,17 @@ angular.module('frontendApp')
     $scope.documents = undefined
     $scope.files = []
 
+    $scope.pubmedId = undefined
+
+    $scope.Session = Session
+
     userId = $routeParams.id
 
     $scope.refreshUser = () ->
       $http.get(SERVER_URL + "/users/" + userId)
         .then (response) ->
           $scope.user = response.data
+          console.log $scope.user
           if not $scope.user.image
             $scope.user.image = "images/user.png"
 
@@ -46,19 +51,28 @@ angular.module('frontendApp')
       $http(req).then () ->
         $scope.refreshUserDocuments()
 
+    uploadDocument = (name, content) ->
+      req =
+        method: 'POST'
+        url: SERVER_URL + '/import'
+        headers:
+          'Content-Type': 'application/json'
+        data:
+          'document_id': name
+          'text': content
+          'visibility': 1
+      $http(req).then () ->
+        $scope.refreshUserDocuments()
+
     $scope.upload = () ->
       for file in $scope.files
-        req =
-          method: 'POST'
-          url: SERVER_URL + '/import'
-          headers:
-            'Content-Type': 'application/json'
-          data:
-            'document_id': file.name
-            'text': file.body
-            'visibility': 1
-        $http(req).then () ->
-          $scope.refreshUserDocuments()
+        uploadDocument(file.name, file.body)
+      $scope.files = []
+
+    $scope.uploadFromPubmed = () ->
+      $http.get(SERVER_URL + '/pubmed/' + $scope.pubmedId).then (response) ->
+        uploadDocument('pubmed_' + $scope.pubmedId, response.data)
+        $scope.pubmedId = undefined
 
     $scope.refreshUser()
     $scope.refreshUserDocuments()

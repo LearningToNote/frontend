@@ -7,11 +7,11 @@ div.user-id {
 }
 
 div.created-at {
-    min-width: 200px;
+    min-width: 150px;
 }
 
 div.updated-at {
-    min-width: 200px;
+    min-width: 150px;
 }
 
 a.document-actions {
@@ -49,4 +49,13 @@ img#user-image {
     max-height: 150px;
     width: auto;
     height: auto;
+}
+
+span.upload-label {
+    margin-right: 10px;
+}
+
+input.upload-input {
+    width: 300px;
+    margin-right: 10px;
 }
