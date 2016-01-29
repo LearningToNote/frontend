@@ -9,7 +9,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'routeStyles',
-    'ngFile'
+    'ngFile',
+    'ui.bootstrap'
   ])
   .config ($routeProvider, USER_ROLES) ->
     $routeProvider
