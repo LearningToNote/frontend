@@ -55,8 +55,10 @@
       </div>
     </div>
 
+
     <div class="container">
-    <div ng-view=""></div>
+      <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+      <div ng-view=""></div>
     </div>
 
     <div class="footer">
@@ -77,6 +79,7 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route-styles/route-styles.js"></script>
     <script src="bower_components/angular-file-directive/angular-file-directive.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
