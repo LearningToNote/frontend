@@ -19,7 +19,6 @@ angular.module('frontendApp')
       $http.get(SERVER_URL + "/users/" + userId)
         .then (response) ->
           $scope.user = response.data
-          console.log $scope.user
           if not $scope.user.image
             $scope.user.image = "images/user.png"
 
@@ -36,8 +35,13 @@ angular.module('frontendApp')
       req =
         method: 'DELETE'
         url: SERVER_URL + '/user_documents/' + doc.id
-      $http(req).then () ->
-        $scope.refreshUserDocuments()
+      $http(req).then(
+        (success) ->
+          $scope.refreshUserDocuments()
+          $scope.$parent.alert("Document successfully deleted.", 'success')
+        (error) ->
+          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+      )
 
     $scope.predictDocument = (doc) ->
       req =
@@ -48,8 +52,12 @@ angular.module('frontendApp')
         data:
           'user_id': doc['user_id']
           'document_id': doc['document_id']
-      $http(req).then () ->
-        $scope.refreshUserDocuments()
+      $http(req).then(
+        (success) ->
+          $scope.refreshUserDocuments()
+        (error) ->
+          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+      )
 
     uploadDocument = (name, content) ->
       req =
@@ -61,8 +69,13 @@ angular.module('frontendApp')
           'document_id': name
           'text': content
           'visibility': 1
-      $http(req).then () ->
-        $scope.refreshUserDocuments()
+      $http(req).then(
+        (success) ->
+          $scope.refreshUserDocuments()
+          $scope.$parent.alert('Document import complete.', 'success')
+        (error) ->
+          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+      )
 
     $scope.upload = () ->
       for file in $scope.files
@@ -70,9 +83,13 @@ angular.module('frontendApp')
       $scope.files = []
 
     $scope.uploadFromPubmed = () ->
-      $http.get(SERVER_URL + '/pubmed/' + $scope.pubmedId).then (response) ->
-        uploadDocument('pubmed_' + $scope.pubmedId, response.data)
-        $scope.pubmedId = undefined
+      $http.get(SERVER_URL + '/pubmed/' + $scope.pubmedId).then(
+        (response) ->
+          uploadDocument('pubmed_' + $scope.pubmedId, response.data)
+          $scope.pubmedId = undefined
+        (error) ->
+          $scope.$parent.alert('There was a problem retrieving the document from PubMed. Is the ID correct?', 'danger')
+      )
 
     $scope.refreshUser()
     $scope.refreshUserDocuments()
