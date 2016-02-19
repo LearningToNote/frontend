@@ -9,8 +9,8 @@ angular.module('frontendApp')
 
     $scope.alerts = []
 
-    $rootScope.$on AUTH_EVENTS.loginFailed, (event) ->
-        $scope.alert("There is something wrong with this combination of username and password!", "danger")
+    $rootScope.$on AUTH_EVENTS.loginFailed, (event, error) ->
+        $scope.alert("Error: #{error.data} (#{error.status})", "danger")
 
     $rootScope.$on AUTH_EVENTS.loginSuccess, (event) ->
         $scope.alerts = []

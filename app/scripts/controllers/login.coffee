@@ -9,11 +9,11 @@ angular.module('frontendApp')
 
     $scope.loginWith = (credentials) ->
       Authentication.login(credentials).then(
-        (user) ->
+        (success) ->
           $rootScope.$broadcast AUTH_EVENTS.loginSuccess
           $location.url("/")
-        () ->
-          $rootScope.$broadcast AUTH_EVENTS.loginFailed
+        (error) ->
+          $rootScope.$broadcast AUTH_EVENTS.loginFailed, error
       )
 
     return
