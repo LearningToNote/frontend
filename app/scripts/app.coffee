@@ -49,6 +49,11 @@ angular
         css: 'styles/evaluation.css'
         data:
           authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+      .when '/documents',
+        templateUrl: 'views/documents.html'
+        controller: 'DocumentsCtrl'
+        controllerAs: 'documents'
+        css: 'styles/documents.css'
       .otherwise
         redirectTo: '/'
   .config(['$httpProvider', ($httpProvider) ->
