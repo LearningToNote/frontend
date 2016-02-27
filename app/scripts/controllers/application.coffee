@@ -23,7 +23,8 @@ angular.module('frontendApp')
         $scope.alerts.splice(index, 1)
 
     $scope.logout = () ->
-      Authentication.logout()
-      $location.url("/login")
+        $scope.alerts = []
+        Authentication.logout()
+        $location.url("/login")
 
     return
