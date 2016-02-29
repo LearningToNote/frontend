@@ -1,1 +1,54 @@
-<p>This is the documents view.</p>
+<div class="tasks-list">
+  <div class="task" ng-repeat="task in tasks">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title flex-container">
+          <span class="id" ng-bind="task.task_id"></span>
+          <a class="taskname flex-item" href="" ng-click="expandTask(task)" ng-bind="task.task_name"></a>
+          <span ng-show="task.user_name">by</span>
+          <a class="username" ng-href="#/users/{{task.user_id}}" ng-bind="task.user_name"></a>
+        </h4>
+      </div>
+      <div class="panel-collapse collapse" uib-collapse="expandedTask != task">
+        <span class="padded loading-message" ng-show="loading">Loading...</span>
+        <span class="padded loading-message" ng-show="!loading && documents.length == 0">There are no documents for this task.</span>
+        <div class="padded documents" nv-file-drop uploader="uploader" ng-show="documents.length != 0">
+          <div class="document" ng-repeat="document in documents">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title flex-container">
+                  <a class="flex-item" href="" ng-click="expandDocument(document)" ng-bind="document.document_id"></a>
+                  <span class="glyphicon glyphicon-user"></span>
+                  <span ng-bind="document.user_document_count"></span>
+                </h4>
+              </div>
+              <div class="panel-collapse collapse" uib-collapse="expandedDocument != document">
+                <span class="padded loading-message" ng-show="loadingDocument">Loading...</span>
+                <div class="flex-container" ng-show="userDocuments.length != 0">
+                  <table class="table table-striped">
+                    <tr>
+                      <th>User</th>
+                      <th>Entities</th>
+                      <th>Pairs</th>
+                      <th>Delete?</th>
+                    </tr>
+                    <tr ng-repeat="userDocument in userDocuments">
+                      <td>{{userDocument.user_name}}</td>
+                      <td>{{userDocument.entities}}</td>
+                      <td>{{userDocument.pairs}}</td>
+                      <td>
+                        <a href="" ng-click="deleteUserDocument(userDocument)">
+                          <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+span.id {
+    width: 30px;
+    font-weight: bold;
+}
+
+a.username {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+div.document-id {
+    min-width: 250px;
+}
+
+div.user-id {
+    min-width: 150px;
+}
+
+div.created-at {
+    min-width: 150px;
+}
+
+div.updated-at {
+    min-width: 150px;
+}
+
+a.document-actions {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+div.documents {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+div.document:nth-child(odd) {
+    background-color: #f8f8f8;
+}
+
+div#upload-container {
+    margin-top: 10px;
+}
+
+span.upload-label {
+    margin-right: 10px;
+}
+
+input.upload-input {
+    width: 300px;
+    margin-right: 10px;
+}
+
+.padded {
+    padding: 10px;
+}
