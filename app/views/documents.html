@@ -24,6 +24,7 @@
               </div>
               <div class="panel-collapse collapse" uib-collapse="expandedDocument != document">
                 <span class="padded loading-message" ng-show="loadingDocument">Loading...</span>
+                <span class="padded" ng-show="userDocuments.length == 0">There are no annotations yet.</span>
                 <div class="flex-container" ng-show="userDocuments.length != 0">
                   <table class="table table-striped">
                     <tr>
