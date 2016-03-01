@@ -10,7 +10,7 @@
         </h4>
       </div>
       <div class="panel-collapse collapse" uib-collapse="expandedTask != task">
-        <span class="padded loading-message" ng-show="loading">Loading...</span>
+        <span class="padded loading-message" ng-show="loading">Refreshing...</span>
         <span class="padded loading-message" ng-show="!loading && documents.length == 0">There are no documents for this task.</span>
         <div class="padded documents" nv-file-drop uploader="uploader" ng-show="documents.length != 0">
           <div class="document" ng-repeat="document in documents">
@@ -30,7 +30,9 @@
                 </h4>
               </div>
               <div class="panel-collapse collapse" uib-collapse="expandedDocument != document">
-                <span class="padded loading-message" ng-show="loadingDocument">Loading...</span>
+                <span class="padded loading-message" ng-show="loadingDocument">
+                  Refreshing...
+                </span>
                 <span class="padded" ng-show="userDocuments.length == 0">
                   There are no annotations yet.
                   <a ng-href="{{generateTextAELinkFor(document)}}">
