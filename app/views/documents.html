@@ -20,18 +20,30 @@
                   <a class="flex-item" href="" ng-click="expandDocument(document)" ng-bind="document.document_id"></a>
                   <span class="glyphicon glyphicon-user"></span>
                   <span ng-bind="document.user_document_count"></span>
+                  <a class="action" href="" ng-click="deleteDocument(document)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </a>
+                  <a class="action" ng-href="{{generateTextAELinkFor(document)}}">
+                    <span class="glyphicon glyphicon-file"></span>
+                    <span>Show</span>
+                  </a>
                 </h4>
               </div>
               <div class="panel-collapse collapse" uib-collapse="expandedDocument != document">
                 <span class="padded loading-message" ng-show="loadingDocument">Loading...</span>
-                <span class="padded" ng-show="userDocuments.length == 0">There are no annotations yet.</span>
+                <span class="padded" ng-show="userDocuments.length == 0">
+                  There are no annotations yet.
+                  <a ng-href="{{generateTextAELinkFor(document)}}">
+                    View this document
+                  </a>
+                </span>
                 <div class="flex-container" ng-show="userDocuments.length != 0">
                   <table class="table table-striped">
                     <tr>
                       <th>User</th>
                       <th>Entities</th>
                       <th>Pairs</th>
-                      <th>Delete?</th>
+                      <th>Actions</th>
                     </tr>
                     <tr ng-repeat="userDocument in userDocuments">
                       <td>{{userDocument.user_name}}</td>

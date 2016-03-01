@@ -35,6 +35,10 @@ angular.module('frontendApp')
           $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
       )
 
+    $scope.generateTextAELinkFor = (doc) ->
+      landingURL = "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}"
+      return SERVER_URL + landingURL
+
     getTasks = () ->
       $scope.loading = true
       $http.get(SERVER_URL + "/tasks").then(

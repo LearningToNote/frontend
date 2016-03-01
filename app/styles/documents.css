@@ -54,3 +54,7 @@ input.upload-input {
 .padded {
     padding: 10px;
 }
+
+a.action {
+    margin-left: 10px;
+}
