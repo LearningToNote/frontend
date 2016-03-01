@@ -13,6 +13,9 @@ angular.module('frontendApp')
     $scope.loadingDocument = false
     $scope.userDocuments = []
 
+    $scope.files = []
+    $scope.pubmedId = undefined
+
     $scope.expandTask = (task) ->
       $scope.documents = []
       $scope.expandedTask = task
@@ -51,11 +54,26 @@ angular.module('frontendApp')
           $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
       )
 
+    $scope.upload = () ->
+      for file in $scope.files[$scope.expandedTask.task_id]
+        uploadDocument(file.name, file.body)
+      $scope.files[$scope.expandedTask.task_id] = []
+
+    $scope.uploadFromPubmed = () ->
+      $http.get(SERVER_URL + '/pubmed/' + $scope.pubmedId).then(
+        (response) ->
+          uploadDocument('pubmed_' + $scope.pubmedId, response.data)
+          $scope.pubmedId = undefined
+        (error) ->
+          $scope.$parent.alert('There was a problem retrieving the document from PubMed. Is the ID correct?', 'danger')
+      )
+
     getTasks = () ->
       $scope.loading = true
       $http.get(SERVER_URL + "/tasks").then(
         (response) ->
           $scope.tasks = response.data
+          $scope.files = ([] for i in [0..$scope.tasks.length])
           $scope.loading = false
         (error) ->
           $scope.$parent.alert("An error occured while fetching the tasks.", "danger")
@@ -89,6 +107,26 @@ angular.module('frontendApp')
         if element.document_id == doc.document_id
           element.user_document_count = element.user_document_count - 1
           break
+
+    uploadDocument = (name, content) ->
+      console.log "uploading #{name}"
+      req =
+        method: 'POST'
+        url: SERVER_URL + '/import'
+        headers:
+          'Content-Type': 'application/json'
+        data:
+          'document_id': name
+          'text': content
+          'visibility': 1
+          'task': $scope.expandedTask.task_id
+      $http(req).then(
+        (success) ->
+          getDetailsFor($scope.expandedTask)
+          $scope.$parent.alert('Document import complete.', 'success')
+        (error) ->
+          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+      )
 
     getTasks()
     return

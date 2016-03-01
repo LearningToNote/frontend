@@ -61,6 +61,18 @@
             </div>
           </div>
         </div>
+        <div class="flex-container" id="upload-container">
+          <div class="flex-item"></div>
+          <span class="upload-label">Local file upload:</span>
+          <input class="upload-input" type="file" file="files[task.task_id]" id="file-upload">
+          <button class="btn btn-default upload-button" ng-click="upload()">upload</button>
+        </div>
+        <div class="flex-container" id="pubmed-upload">
+          <div class="flex-item"></div>
+          <span class="upload-label">PubMed import:</span>
+          <input class="upload-input" ng-model="pubmedId" placeholder="PMID">
+          <button class="btn btn-default upload-button" ng-click="uploadFromPubmed()">upload</button>
+        </div>
       </div>
     </div>
   </div>
