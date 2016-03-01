@@ -6,43 +6,10 @@
             <h4>{{user.description}}</h4>
         </div>
     </div>
-    <h4>Documents:</h4>
-    <div class="documents" nv-file-drop uploader="uploader">
-        <div class="document" ng-show="documents" ng-repeat="document in documents">
-            <div class="user flex-container">
-                <div class="document-id">{{document.document_id}}</div>
-                <div class="user-id">{{document.user_id}}</div>
-                <div class="created-at">{{document.created_at}}</div>
-                <div class="updated-at">{{document.updated_at}}</div>
-                <div class="flex-item"></div>
-                <a class="document-actions" ng-click="predictDocument(document)">
-                    Predict Interactions
-                </a>
-                <a class="document-actions" ng-click="deleteDocument(document)">
-                    Delete
-                </a>
-                <a class="document-actions" ng-click="showDocument(document)">
-                    Show
-                </a>
-            </div>
-        </div>
-    </div>
-    <div ng-hide="documents">
-        There are no documents for this user. Maybe you are not authorized to view them.
-    </div>
-    <div class="flex-container" id="upload-container" ng-show="user.id == Session.id">
-        <div class="flex-item"></div>
-        <span class="upload-label">Local file upload:</span>
-        <input class="upload-input" type="file" file="files" id="file-upload">
-        <button ng-click="upload()">upload</button>
-    </div>
-    <div class="flex-container" id="pubmed-upload" ng-show="user.id == Session.id">
-        <div class="flex-item"></div>
-        <span class="upload-label">PubMed import:</span>
-        <input class="upload-input" ng-model="pubmedId" placeholder="PMID">
-        <button ng-click="uploadFromPubmed()">upload</button>
-    </div>
 </div>
-<div ng-hide="user">
+<div ng-hide="user || loading">
     There is no data about this user available.
+</div>
+<div ng-show="loading">
+    Loading user information...
 </div>
