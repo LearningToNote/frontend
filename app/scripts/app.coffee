@@ -54,6 +54,8 @@ angular
         controller: 'DocumentsCtrl'
         controllerAs: 'documents'
         css: 'styles/documents.css'
+        data:
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
       .otherwise
         redirectTo: '/'
   .config(['$httpProvider', ($httpProvider) ->
