@@ -28,7 +28,8 @@ angular.module('frontendApp')
         url: SERVER_URL + '/user_documents/' + userDocument.id
       $http(req).then(
         (success) ->
-          $scope.expandDocument($scope.expandedDocument)
+          getDocumentDetailsFor($scope.expandedDocument)
+          updateUserCountFor($scope.expandedDocument)
           $scope.$parent.alert("Document successfully deleted.", 'success')
         (error) ->
           $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
@@ -66,6 +67,12 @@ angular.module('frontendApp')
           $scope.$parent.alert("An error occured while fetching document details: \"#{error.data}\"", "danger")
           $scope.loadingDocument = false
       )
+
+    updateUserCountFor = (doc) ->
+      for element in $scope.documents
+        if element.document_id == doc.document_id
+          element.user_document_count = element.user_document_count - 1
+          break
 
     getTasks()
     return
