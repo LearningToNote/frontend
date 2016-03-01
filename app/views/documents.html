@@ -48,7 +48,11 @@
                       <th>Actions</th>
                     </tr>
                     <tr ng-repeat="userDocument in userDocuments">
-                      <td>{{userDocument.user_name}}</td>
+                      <td>
+                        <a ng-href="#/users/{{userDocument.user_id}}">
+                          {{userDocument.user_name}}
+                        </a>
+                      </td>
                       <td>{{userDocument.entities}}</td>
                       <td>{{userDocument.pairs}}</td>
                       <td>
