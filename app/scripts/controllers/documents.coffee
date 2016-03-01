@@ -109,7 +109,7 @@ angular.module('frontendApp')
           break
 
     uploadDocument = (name, content) ->
-      console.log "uploading #{name}"
+      $scope.$parent.alert("Uploading and importing #{name}...")
       req =
         method: 'POST'
         url: SERVER_URL + '/import'
@@ -123,7 +123,8 @@ angular.module('frontendApp')
       $http(req).then(
         (success) ->
           getDetailsFor($scope.expandedTask)
-          $scope.$parent.alert('Document import complete.', 'success')
+          $scope.$parent.clearAlerts()
+          $scope.$parent.alert("Successfully imported #{name}.", 'success')
         (error) ->
           $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
       )

@@ -22,6 +22,9 @@ angular.module('frontendApp')
     $scope.closeAlert = (index) ->
         $scope.alerts.splice(index, 1)
 
+    $scope.clearAlerts = () ->
+        $scope.alerts = []
+
     $scope.logout = () ->
         $scope.alerts = []
         Authentication.logout()
