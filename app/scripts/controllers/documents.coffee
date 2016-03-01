@@ -75,6 +75,8 @@ angular.module('frontendApp')
           $scope.tasks = response.data
           $scope.files = ([] for i in [0..$scope.tasks.length])
           $scope.loading = false
+          if $scope.tasks and $scope.tasks.length > 0
+            $scope.expandTask $scope.tasks[0]
         (error) ->
           $scope.$parent.alert("An error occured while fetching the tasks.", "danger")
           $scope.loading = false
