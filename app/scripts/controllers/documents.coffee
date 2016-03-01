@@ -39,6 +39,18 @@ angular.module('frontendApp')
       landingURL = "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}"
       return SERVER_URL + landingURL
 
+    $scope.deleteDocument = (doc) ->
+      req =
+        method: 'DELETE'
+        url: SERVER_URL + '/documents/' + doc.document_id
+      $http(req).then(
+        (success) ->
+          getDetailsFor($scope.expandedTask)
+          $scope.$parent.alert("Document successfully deleted.", 'success')
+        (error) ->
+          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+      )
+
     getTasks = () ->
       $scope.loading = true
       $http.get(SERVER_URL + "/tasks").then(
