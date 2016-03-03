@@ -50,7 +50,7 @@ div#pubmed-upload {
 span.upload-label {
     margin-top: auto;
     margin-bottom: auto;
-    margin-right: 10px;
+    margin-right: 5px;
     margin-left: 10px;
 }
 
@@ -76,4 +76,9 @@ a.action {
 
 span.glyphicon-user {
     margin-left: 3px;
+}
+
+input.filter {
+    margin-left: 10px;
+    margin-top: 10px;
 }

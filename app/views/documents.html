@@ -12,9 +12,10 @@
       <div class="panel-collapse collapse" uib-collapse="expandedTask != task">
         <span class="padded loading-message" ng-show="loading">Refreshing...</span>
         <span class="padded loading-message" ng-show="!loading && documents.length == 0">There are no documents for this task.</span>
+        <input type="text" class="upload-input filter" ng-model="documentFilter" placeholder="Filter" ng-show="documents.length != 0">
         <div class="padded documents" nv-file-drop uploader="uploader" ng-show="documents.length != 0" infinite-scroll="addMoreDocuments()" infinite-scroll-distance="2">
           <div class="content-wrapper">
-            <div class="panel panel-default" ng-repeat="document in documents | limitTo:documentCount track by document.document_id">
+            <div class="panel panel-default" ng-repeat="document in documents | filter:documentFilter | limitTo:documentCount track by document.document_id">
               <div class="panel-heading">
                 <h4 class="panel-title flex-container">
                   <a class="flex-item" href="" ng-click="expandDocument(document)">{{::document.document_id}}</a>
