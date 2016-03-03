@@ -12,13 +12,13 @@
       <div class="panel-collapse collapse" uib-collapse="expandedTask != task">
         <span class="padded loading-message" ng-show="loading">Refreshing...</span>
         <span class="padded loading-message" ng-show="!loading && documents.length == 0">There are no documents for this task.</span>
-        <div class="padded documents" nv-file-drop uploader="uploader" ng-show="documents.length != 0">
-          <div class="document" ng-repeat="document in documents">
-            <div class="panel panel-default">
+        <div class="padded documents" nv-file-drop uploader="uploader" ng-show="documents.length != 0" infinite-scroll="addMoreDocuments()" infinite-scroll-distance="2">
+          <div class="content-wrapper">
+            <div class="panel panel-default" ng-repeat="document in documents | limitTo:documentCount track by document.document_id">
               <div class="panel-heading">
                 <h4 class="panel-title flex-container">
-                  <a class="flex-item" href="" ng-click="expandDocument(document)" ng-bind="document.document_id"></a>
-                  <span ng-bind="document.user_document_count"></span>
+                  <a class="flex-item" href="" ng-click="expandDocument(document)">{{::document.document_id}}</a>
+                  <span>{{::document.user_document_count}}</span>
                   <span class="glyphicon glyphicon-user"></span>
                   <a class="action" href="" ng-click="deleteDocument(document)">
                     <span class="glyphicon glyphicon-trash"></span>
@@ -47,14 +47,14 @@
                       <th>Pairs</th>
                       <th>Actions</th>
                     </tr>
-                    <tr ng-repeat="userDocument in userDocuments">
+                    <tr ng-repeat="userDocument in userDocuments track by userDocument.id">
                       <td>
                         <a ng-href="#/users/{{userDocument.user_id}}">
-                          {{userDocument.user_name}}
+                          {{::userDocument.user_name}}
                         </a>
                       </td>
-                      <td>{{userDocument.entities}}</td>
-                      <td>{{userDocument.pairs}}</td>
+                      <td>{{::userDocument.entities}}</td>
+                      <td>{{::userDocument.pairs}}</td>
                       <td>
                         <a href="" ng-click="deleteUserDocument(userDocument)">
                           <span class="glyphicon glyphicon-trash"></span>

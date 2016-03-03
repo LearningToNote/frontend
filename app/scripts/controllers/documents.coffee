@@ -12,6 +12,7 @@ angular.module('frontendApp')
     $scope.expandedDocument = undefined
     $scope.loadingDocument = false
     $scope.userDocuments = []
+    $scope.documentCount = 50
 
     $scope.files = []
     $scope.pubmedId = undefined
@@ -67,6 +68,25 @@ angular.module('frontendApp')
         (error) ->
           $scope.$parent.alert('There was a problem retrieving the document from PubMed. Is the ID correct?', 'danger')
       )
+
+    $scope.predictDocument = (doc) ->
+      req =
+        method: 'POST'
+        url: SERVER_URL + '/predict'
+        headers:
+          'Content-Type': 'application/json'
+        data:
+          'user_id': doc.user_id
+          'document_id': doc.document_id
+      $http(req).then(
+        (success) ->
+          $scope.$parent.alert("Predictions created.", 'success')
+        (error) ->
+          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+      )
+
+    $scope.addMoreDocuments = () ->
+      $scope.documentCount += 2
 
     getTasks = () ->
       $scope.loading = true
