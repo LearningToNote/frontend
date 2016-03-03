@@ -11,7 +11,7 @@ angular.module('frontendApp')
     $scope.documents = []
     $scope.expandedDocument = undefined
     $scope.loadingDocument = false
-    $scope.userDocuments = []
+    $scope.userDocuments = undefined
     $scope.documentCount = 50
 
     $scope.files = []
@@ -19,12 +19,19 @@ angular.module('frontendApp')
 
     $scope.expandTask = (task) ->
       $scope.documents = []
-      $scope.expandedTask = task
-      getDetailsFor(task)
+      if task == $scope.expandedTask
+        $scope.expandedTask = undefined
+      else
+        $scope.expandedTask = task
+        getDetailsFor(task)
 
     $scope.expandDocument = (doc) ->
-      $scope.expandedDocument = doc
-      getDocumentDetailsFor(doc)
+      $scope.userDocuments = undefined
+      if doc == $scope.expandedDocument
+        $scope.expandedDocument = undefined
+      else
+        $scope.expandedDocument = doc
+        getDocumentDetailsFor(doc)
 
     $scope.deleteUserDocument = (userDocument) ->
       req =
