@@ -47,7 +47,7 @@ angular.module('frontendApp')
       )
 
     $scope.generateTextAELinkFor = (doc) ->
-      landingURL = "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}"
+      landingURL = "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}&tid=#{$scope.expandedTask.task_id}"
       return SERVER_URL + landingURL
 
     $scope.deleteDocument = (doc) ->
