@@ -35,11 +35,16 @@
           </div>
           <div class="actions flex-container">
             <div class="flex-item"></div>
-            <button class="btn btn-info" ng-click="update(task)">Update</button>
-            <button class="btn btn-danger" ng-click="delete(task)">Delete</button
->          </div>
+            <button class="btn btn-success" ng-click="update(task)" ng-show="task.task_id == null">Save</button>
+            <button class="btn btn-info" ng-click="update(task)" ng-hide="task.task_id == null">Update</button>
+            <button class="btn btn-danger" ng-click="delete(task)" ng-hide="task.task_id == null">Delete</button>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="flex-container">
+    <div class="flex-item"></div>
+    <button class="btn btn-success" ng-click="addTask()">Add Task</button>
   </div>
 </div>

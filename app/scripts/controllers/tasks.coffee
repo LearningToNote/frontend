@@ -10,6 +10,15 @@ angular.module('frontendApp')
     $scope.configs = ["LTN::ltn_analysis", "EXTRACTION_CORE_ENTERPRISE"]
     $scope.users
 
+    $scope.addTask = () ->
+      $scope.allTasks.push {
+        'task_id': null
+        'task_name': null
+        'task_domain': null
+        'task_config': null
+        'user_id': null
+      }
+
     $scope.update = (task) ->
       req =
         method: 'POST'
