@@ -60,6 +60,9 @@ angular
         templateUrl: 'views/tasks.html'
         controller: 'TasksCtrl'
         controllerAs: 'tasks'
+        css: 'styles/tasks.css'
+        data:
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
       .otherwise
         redirectTo: '/'
   .config(['$httpProvider', ($httpProvider) ->
