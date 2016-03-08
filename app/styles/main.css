@@ -37,3 +37,7 @@
 #abstract {
   text-align: justify;
 }
+
+li.selected {
+  font-weight: bold;
+}
