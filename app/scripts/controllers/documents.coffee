@@ -139,12 +139,16 @@ angular.module('frontendApp')
 
     uploadDocument = (name, content) ->
       $scope.$parent.alert("Uploading and importing #{name}...")
+      doc_type = 'plaintext'
+      if name.slice(-3) == 'xml'
+        doc_type = 'bioc'
       req =
         method: 'POST'
         url: SERVER_URL + '/import'
         headers:
           'Content-Type': 'application/json'
         data:
+          'type': doc_type
           'document_id': name
           'text': content
           'visibility': 1
