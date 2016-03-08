@@ -1,0 +1,45 @@
+<span class="padded loading-message" ng-show="loading">Refreshing...</span>
+<span class="padded loading-message" ng-show="!loading && allTasks.length == 0">There are no tasks.</span>
+<div class="tasks-list">
+  <div class="task" ng-repeat="task in allTasks">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title flex-container">
+          <span class="id" ng-bind="task.task_id"></span>
+          <span class="taskname flex-item">
+            {{::task.task_name}}
+          </span>
+          <span ng-show="task.user_name">by</span>
+          <a class="username" ng-href="#/users/{{task.user_id}}">
+            {{::task.user_name}}
+          </a>
+        </h4>
+      </div>
+      <div class="panel-collapse">
+        <div class="padded">
+          <div class="padded input-group">
+            <span class="input-group-addon">Task Name</span>
+            <input type="text" class="form-control" ng-required="true" ng-model="task.task_name">
+          </div>
+          <div class="padded input-group">
+            <span class="input-group-addon">Document Table Name</span>
+            <input type="text" class="form-control" ng-required="true" ng-model="task.task_domain">
+          </div>
+          <div class="padded input-group">
+            <span class="input-group-addon">Text Analysis Configuration</span>
+            <select ng-required="true" class="form-control" ng-model="task.task_config" ng-options="config for config in configs"></select>
+          </div>
+          <div class="padded input-group">
+            <span class="input-group-addon">Author</span>
+            <select ng-required="true" class="form-control" ng-model="task.user_id" ng-options="user.id as user.name for user in users"></select>
+          </div>
+          <div class="actions flex-container">
+            <div class="flex-item"></div>
+            <button class="btn btn-info" ng-click="update(task)">Update</button>
+            <button class="btn btn-danger" ng-click="delete(task)">Delete</button
+>          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

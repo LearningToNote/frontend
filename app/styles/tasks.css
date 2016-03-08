@@ -1,0 +1,30 @@
+span.id {
+    width: 30px;
+    font-weight: bold;
+}
+
+a.username {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.padded {
+    padding: 10px;
+}
+
+span.glyphicon-user {
+    margin-left: 3px;
+}
+
+input.filter {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.input-group-addon {
+    min-width: 200px;
+}
+
+button.btn {
+   margin-right: 10px;
+}

@@ -30,4 +30,9 @@ angular.module('frontendApp')
         Authentication.logout()
         $location.url("/login")
 
+    $scope.isSelected = (menuItem) ->
+        if $location.url() == menuItem
+            return "selected"
+        return undefined
+
     return
