@@ -33,6 +33,9 @@ angular.module('frontendApp')
         $scope.expandedDocument = doc
         getDocumentDetailsFor(doc)
 
+    $scope.generateExportDocumentLinkFor = (doc) ->
+      return SERVER_URL + '/export/' + doc.document_id
+
     $scope.deleteUserDocument = (userDocument) ->
       req =
         method: 'DELETE'

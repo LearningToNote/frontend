@@ -21,6 +21,9 @@
                   <a class="flex-item" href="" ng-click="expandDocument(document)">{{::document.document_id}}</a>
                   <span>{{::document.user_document_count}}</span>
                   <span class="glyphicon glyphicon-user"></span>
+                  <a class="action" ng-href="{{generateExportDocumentLinkFor(document)}}" title="Export in BioC format">
+                    <span class="glyphicon glyphicon-share"></span>
+                  </a>
                   <a class="action" href="" ng-click="deleteDocument(document)">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
