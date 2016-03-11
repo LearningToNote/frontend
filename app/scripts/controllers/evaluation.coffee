@@ -5,25 +5,32 @@ angular.module('frontendApp')
 
     SERVER_URL = "https://#{location.hostname}:8080"
 
+    $scope.tasks = []
     $scope.documents = []
     $scope.users = []
 
     $scope.user1 = undefined
     $scope.user2 = undefined
-    $scope.documentId = undefined
+    $scope.document = undefined
+    $scope.task_id = undefined
 
     $scope.results = undefined
     $scope.sum = undefined
     $scope.wrongType = undefined
     $scope.wrongTypeSum = undefined
 
-    $http.get(SERVER_URL + "/documents")
+    $http.get(SERVER_URL + "/tasks")
         .then (response) ->
-            $scope.documents = response.data
+            $scope.tasks = response.data
 
     $http.get(SERVER_URL + "/users")
         .then (response) ->
             $scope.users = response.data
+
+    $scope.getDocuments = () ->
+        $http.get(SERVER_URL + "/tasks/" + $scope.task_id)
+            .then (response) ->
+                $scope.documents = response.data.documents
 
     $scope.evaluate = () ->
         $scope.results = undefined
@@ -32,7 +39,7 @@ angular.module('frontendApp')
             data:
                 user1: $scope.user1.id
                 user2: $scope.user2.id
-                document_id: $scope.documentId
+                document_id: $scope.document.document_id
             method: "POST"
         )
             .then (response) ->

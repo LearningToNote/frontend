@@ -2,18 +2,30 @@
 <div ng-show="documents">
     <h4>Parameters</h4>
     <div class="padded flex-container">
+        <div class="padded eval-label">Task:</div>
+        <select class="form-control" ng-model="task_id" ng-change="getDocuments()"
+            ng-options="task.task_id as task.task_name for task in tasks">
+        </select>
+    </div>
+    <div class="padded flex-container">
         <div class="padded eval-label">Document:</div>
-        <select class="form-control" ng-model="documentId" ng-options="document for document in documents">
+        <select class="form-control" ng-model="document"
+            ng-options="document.document_id for document in documents"
+            ng-disabled="documents.length == 0">
         </select>
     </div>
     <div class="padded flex-container">
         <div class="padded eval-label">User 1:</div>
-        <select class="form-control" ng-model="user1" ng-options="user.id for user in users">
+        <select class="form-control" ng-model="user1"
+            ng-options="user.id for user in users"
+            ng-disabled="documents.length == 0">
         </select>
     </div>
     <div class="padded flex-container">
         <div class="padded eval-label">User 2:</div>
-        <select class="form-control" ng-model="user2" ng-options="user.id for user in users">
+        <select class="form-control" ng-model="user2"
+        ng-options="user.id for user in users"
+        ng-disabled="documents.length == 0">
         </select>
     </div>
     <button class="btn btn-default" ng-click="evaluate()">
