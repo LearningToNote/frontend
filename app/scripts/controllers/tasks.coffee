@@ -7,7 +7,10 @@ angular.module('frontendApp')
 
     $scope.loading = false
     $scope.allTasks = []
-    $scope.configs = ["LTN::ltn_analysis", "EXTRACTION_CORE_ENTERPRISE"]
+    $scope.configs = [
+      "LTN::bio_text_entity_recognition"
+      "LTN::business_text_entity_recognition"
+    ]
     $scope.users
 
     $scope.addTask = () ->
