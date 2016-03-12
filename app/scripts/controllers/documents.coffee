@@ -98,6 +98,29 @@ angular.module('frontendApp')
     $scope.addMoreDocuments = () ->
       $scope.documentCount += 2
 
+    $scope.toggleDocumentVisibility = (document_id, userDocument) ->
+      previousValue = userDocument.visible
+      userDocument.visible = !userDocument.visible
+      req =
+        method: 'POST'
+        url: SERVER_URL + '/userdoc_visibility/' + document_id
+        headers:
+          'Content-Type': 'application/json'
+        data:
+          'visible': userDocument.visible
+      $http(req).then(
+        (success) ->
+        (error) ->
+          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+          userDocument.visible = previousValue
+      )
+
+    $scope.getVisibilityToggleClassFor = (userDocument) ->
+      if userDocument.visible
+        return "glyphicon glyphicon-eye-open"
+      else
+        return "glyphicon glyphicon-eye-close text-muted"
+
     getTasks = () ->
       $scope.loading = true
       $http.get(SERVER_URL + "/tasks").then(
@@ -108,7 +131,7 @@ angular.module('frontendApp')
           if $scope.tasks and $scope.tasks.length > 0
             $scope.expandTask $scope.tasks[0]
         (error) ->
-          $scope.$parent.alert("An error occured while fetching the tasks.", "danger")
+          $scope.$parent.alert("An error occurred while fetching the tasks.", "danger")
           $scope.loading = false
       )
 
@@ -119,7 +142,7 @@ angular.module('frontendApp')
           $scope.documents = response.data.documents
           $scope.loading = false
         (error) ->
-          $scope.$parent.alert("An error occured while fetching task details: \"#{error.data}\"", "danger")
+          $scope.$parent.alert("An error occurred while fetching task details: \"#{error.data}\"", "danger")
           $scope.loading = false
       )
 
@@ -130,7 +153,7 @@ angular.module('frontendApp')
           $scope.userDocuments = response.data
           $scope.loadingDocument = false
         (error) ->
-          $scope.$parent.alert("An error occured while fetching document details: \"#{error.data}\"", "danger")
+          $scope.$parent.alert("An error occurred while fetching document details: \"#{error.data}\"", "danger")
           $scope.loadingDocument = false
       )
 
