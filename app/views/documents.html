@@ -21,10 +21,10 @@
                   <a class="flex-item" href="" ng-click="expandDocument(document)">{{::document.document_id}}</a>
                   <span>{{::document.user_document_count}}</span>
                   <span class="glyphicon glyphicon-user"></span>
-                  <a class="action" ng-href="{{generateExportDocumentLinkFor(document)}}" title="Export in BioC format">
+                  <a class="action" ng-href="{{generateExportDocumentLinkFor(document)}}" title="Export the text and your annotations in BioC format">
                     <span class="glyphicon glyphicon-share"></span>
                   </a>
-                  <a class="action" href="" ng-click="deleteDocument(document)">
+                  <a class="action" href="" ng-click="deleteDocument(document)" title="Delete this document and all annotations">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
                   <a class="action" ng-href="{{generateTextAELinkFor(document)}}">
@@ -60,7 +60,8 @@
                       <td>{{::userDocument.entities}}</td>
                       <td>{{::userDocument.pairs}}</td>
                       <td>
-                        <a href="" ng-click="deleteUserDocument(userDocument)">
+                        <a href="" ng-click="deleteUserDocument(userDocument)"
+                          title="Delete all annotations in this document made by {{userDocument.user_name}}">
                           <span class="glyphicon glyphicon-trash"></span>
                         </a>
                         <a href="" ng-click="toggleDocumentVisibility(document.document_id, userDocument)" ng-show="userDocument.from_current_user"

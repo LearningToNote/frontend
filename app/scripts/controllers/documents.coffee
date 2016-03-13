@@ -37,33 +37,37 @@ angular.module('frontendApp')
       return SERVER_URL + '/export/' + doc.document_id
 
     $scope.deleteUserDocument = (userDocument) ->
-      req =
-        method: 'DELETE'
-        url: SERVER_URL + '/user_documents/' + userDocument.id
-      $http(req).then(
-        (success) ->
-          getDocumentDetailsFor($scope.expandedDocument)
-          updateUserCountFor($scope.expandedDocument)
-          $scope.$parent.alert("Document successfully deleted.", 'success')
-        (error) ->
-          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
-      )
+      if confirm("Are you sure that you want to delete all annotations " +
+                  "made by " + userDocument.user_name + " in this document? "+
+                  "This cannot be undone.")
+        req =
+          method: 'DELETE'
+          url: SERVER_URL + '/user_documents/' + userDocument.id
+        $http(req).then(
+          (success) ->
+            getDocumentDetailsFor($scope.expandedDocument)
+            updateUserCountFor($scope.expandedDocument)
+            $scope.$parent.alert("Document successfully deleted.", 'success')
+          (error) ->
+            $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+        )
 
     $scope.generateTextAELinkFor = (doc) ->
       landingURL = "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}&tid=#{$scope.expandedTask.task_id}"
       return SERVER_URL + landingURL
 
     $scope.deleteDocument = (doc) ->
-      req =
-        method: 'DELETE'
-        url: SERVER_URL + '/documents/' + doc.document_id
-      $http(req).then(
-        (success) ->
-          getDetailsFor($scope.expandedTask)
-          $scope.$parent.alert("Document successfully deleted.", 'success')
-        (error) ->
-          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
-      )
+      if confirm("Are you sure that you want to delete this document including all annotations? This cannot be undone.")
+        req =
+          method: 'DELETE'
+          url: SERVER_URL + '/documents/' + doc.document_id
+        $http(req).then(
+          (success) ->
+            getDetailsFor($scope.expandedTask)
+            $scope.$parent.alert("Document successfully deleted.", 'success')
+          (error) ->
+            $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+        )
 
     $scope.upload = () ->
       for file in $scope.files[$scope.expandedTask.task_id]
