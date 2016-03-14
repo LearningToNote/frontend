@@ -168,6 +168,7 @@ angular.module('frontendApp')
           break
 
     uploadDocument = (name, content) ->
+      $scope.$parent.clearAlerts()
       $scope.$parent.alert("Uploading and importing #{name}...")
       doc_type = 'plaintext'
       if name.slice(-3) == 'xml'
