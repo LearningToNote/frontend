@@ -16,12 +16,12 @@
         </h4>
       </div>
       <div class="panel-collapse">
-        <div class="padded">
+        <div class="padded" ng-form="taskForm">
           <div class="padded input-group">
             <span class="input-group-addon">Task Name</span>
-            <input type="text" class="form-control" ng-required="true" ng-model="task.task_name">
+            <input type="text" class="form-control" required ng-model="task.task_name">
           </div>
-          <div class="padded input-group" ng-hide="task.is_new">
+          <div class="padded input-group" ng-hide="task.task_id == null">
             <span class="input-group-addon">Document Table Name</span>
             <input type="text" class="form-control" ng-model="task.task_domain" disabled="true">
           </div>
@@ -29,9 +29,9 @@
             <span class="input-group-addon">Text Analysis Configuration</span>
             <select ng-required="true" class="form-control" ng-model="task.task_config" ng-options="config.config as config.label for config in configs"></select>
           </div>
-          <div class="padded input-group" ng-hide="task.is_new">
+          <div class="padded input-group" ng-hide="task.task_id == null">
             <span class="input-group-addon">Author</span>
-            <input ng-required="false" class="form-control" ng-disabled="true" ng-model="task.user_id">
+            <input required class="form-control" ng-disabled="true" ng-model="task.user_id">
           </div>
           <div class="actions flex-container">
             <div class="flex-item"></div>

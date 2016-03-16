@@ -20,10 +20,11 @@ angular.module('frontendApp')
         'task_domain': null
         'task_config': null
         'user_id': null
-        'is_new': true
       }
 
     $scope.update = (task) ->
+      return unless task.task_name and task.task_config
+
       req =
         method: 'POST'
         url: SERVER_URL + '/tasks/' + task.task_id
