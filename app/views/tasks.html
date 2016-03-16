@@ -21,15 +21,15 @@
             <span class="input-group-addon">Task Name</span>
             <input type="text" class="form-control" ng-required="true" ng-model="task.task_name">
           </div>
-          <div class="padded input-group">
+          <div class="padded input-group" ng-hide="task.is_new">
             <span class="input-group-addon">Document Table Name</span>
-            <input type="text" class="form-control" ng-required="true" ng-model="task.task_domain">
+            <input type="text" class="form-control" ng-model="task.task_domain" disabled="true">
           </div>
           <div class="padded input-group">
             <span class="input-group-addon">Text Analysis Configuration</span>
             <select ng-required="true" class="form-control" ng-model="task.task_config" ng-options="config.config as config.label for config in configs"></select>
           </div>
-          <div class="padded input-group">
+          <div class="padded input-group" ng-hide="task.is_new">
             <span class="input-group-addon">Author</span>
             <input ng-required="false" class="form-control" ng-disabled="true" ng-model="task.user_id">
           </div>

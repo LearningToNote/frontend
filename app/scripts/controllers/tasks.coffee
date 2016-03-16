@@ -20,6 +20,7 @@ angular.module('frontendApp')
         'task_domain': null
         'task_config': null
         'user_id': null
+        'is_new': true
       }
 
     $scope.update = (task) ->
