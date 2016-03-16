@@ -27,11 +27,11 @@
           </div>
           <div class="padded input-group">
             <span class="input-group-addon">Text Analysis Configuration</span>
-            <select ng-required="true" class="form-control" ng-model="task.task_config" ng-options="config for config in configs"></select>
+            <select ng-required="true" class="form-control" ng-model="task.task_config" ng-options="config.config as config.label for config in configs"></select>
           </div>
           <div class="padded input-group">
             <span class="input-group-addon">Author</span>
-            <select ng-required="true" class="form-control" ng-model="task.user_id" ng-options="user.id as user.name for user in users"></select>
+            <input ng-required="false" class="form-control" ng-disabled="true" ng-model="task.user_id">
           </div>
           <div class="actions flex-container">
             <div class="flex-item"></div>

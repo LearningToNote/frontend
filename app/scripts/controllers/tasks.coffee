@@ -8,8 +8,8 @@ angular.module('frontendApp')
     $scope.loading = false
     $scope.allTasks = []
     $scope.configs = [
-      "LTN::bio_text_entity_recognition"
-      "LTN::business_text_entity_recognition"
+      {"config": "LTN::bio_text_entity_recognition", "label": "Biomedical"}
+      {"config": "LTN::business_text_entity_recognition", "label": "Business"}
     ]
     $scope.users
 
@@ -57,18 +57,5 @@ angular.module('frontendApp')
           $scope.loading = false
       )
 
-    getUsers = () ->
-      $scope.laoding = true
-      $http.get(SERVER_URL + "/users").then(
-        (response) ->
-          $scope.users = response.data
-          $scope.loading = false
-        (error) ->
-          $scope.$parent.alert("An error occured while fetching users.", "danger")
-          $scope.loading = false
-      )
-
     getTasks()
-    getUsers()
-
     return
