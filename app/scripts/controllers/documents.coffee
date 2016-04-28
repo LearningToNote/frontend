@@ -15,7 +15,6 @@ angular.module('frontendApp')
     $scope.documentCount = 50
 
     $scope.files = []
-    $scope.pubmedId = undefined
 
     $scope.expandTask = (task) ->
       $scope.documents = []
@@ -75,9 +74,9 @@ angular.module('frontendApp')
       $scope.files[$scope.expandedTask.task_id] = []
 
     $scope.uploadFromPubmed = () ->
-      $http.get(SERVER_URL + '/pubmed/' + $scope.pubmedId).then(
+      $http.get(SERVER_URL + '/pubmed/' + $scope.expandedTask.pubmedId).then(
         (response) ->
-          uploadDocument('pubmed_' + $scope.pubmedId, response.data)
+          uploadDocument('pubmed_' + $scope.expandedTask.pubmedId, response.data)
           $scope.pubmedId = undefined
         (error) ->
           $scope.$parent.alert('There was a problem retrieving the document from PubMed. Is the ID correct?', 'danger')
