@@ -63,6 +63,10 @@ angular
         css: 'styles/tasks.css'
         data:
           authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+      .when '/types',
+        templateUrl: 'views/types.html'
+        controller: 'TypesCtrl'
+        controllerAs: 'types'
       .otherwise
         redirectTo: '/'
   .config(['$httpProvider', ($httpProvider) ->
