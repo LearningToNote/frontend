@@ -49,6 +49,9 @@ angular.module('frontendApp')
           $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
       )
 
+    $scope.cancel = () ->
+      $scope.allTasks.splice(-1, 1)
+
     getTasks = () ->
       $scope.loading = true
       $http.get(SERVER_URL + "/tasks").then(
