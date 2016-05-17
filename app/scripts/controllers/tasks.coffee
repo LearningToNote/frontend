@@ -5,6 +5,7 @@ angular.module('frontendApp')
 
     SERVER_URL = "https://#{location.hostname}:8080"
 
+    $scope.expert_view = false
     $scope.loading = false
     $scope.allTasks = []
     $scope.configs = [

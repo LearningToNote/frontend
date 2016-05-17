@@ -1,6 +1,10 @@
 <span class="padded loading-message" ng-show="loading">Refreshing...</span>
 <span class="padded loading-message" ng-show="!loading && allTasks.length == 0">There are no tasks.</span>
 <div class="tasks-list">
+  <div class="padded flex-container">
+    <input type="checkbox" name="expert-view" value="false" ng-model="expert_view">
+    <span>Expert options</span>
+  </div>
   <div class="task" ng-repeat="task in allTasks">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -21,7 +25,7 @@
             <span class="input-group-addon">Task Name</span>
             <input type="text" class="form-control" required ng-model="task.task_name">
           </div>
-          <div class="padded input-group" ng-hide="task.task_id == null">
+          <div class="padded input-group" ng-hide="task.task_id == null || !expert_view">
             <span class="input-group-addon">Document Table Name</span>
             <input type="text" class="form-control" ng-model="task.task_domain" disabled="true">
           </div>
@@ -29,7 +33,7 @@
             <span class="input-group-addon">Text Analysis Configuration</span>
             <select ng-required="true" class="form-control" ng-model="task.task_config" ng-options="config.config as config.label for config in configs"></select>
           </div>
-          <div class="padded input-group" ng-hide="task.task_id == null">
+          <div class="padded input-group" ng-hide="task.task_id == null || !expert_view">
             <span class="input-group-addon">Author</span>
             <input required class="form-control" ng-disabled="true" ng-model="task.user_id">
           </div>
