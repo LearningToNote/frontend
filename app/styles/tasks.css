@@ -40,3 +40,7 @@ select.ng-invalid-required {
 input.ng-invalid-required {
     border: 1px red solid !important;
 }
+
+a.type-button {
+    margin-left: 10px;
+}

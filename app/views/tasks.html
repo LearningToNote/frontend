@@ -38,6 +38,9 @@
             <input required class="form-control" ng-disabled="true" ng-model="task.user_id">
           </div>
           <div class="actions flex-container">
+            <a class="type-button" ng-href="#/types/{{task.task_id}}">
+              <button class="btn btn-info" ng-hide="task.task_id == null">Edit Types</button>
+            </a>
             <div class="flex-item"></div>
             <button class="btn btn-success" ng-click="update(task)" ng-show="task.task_id == null">Save</button>
             <button class="btn btn-danger" ng-click="cancel()" ng-show="task.task_id == null">Cancel</button>
