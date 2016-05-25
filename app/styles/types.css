@@ -1,0 +1,48 @@
+div.striped:nth-child(odd) {
+    background-color: #f8f8f8;
+}
+
+span.group-label {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+div.indent {
+    width: 50px;
+}
+
+div.type-label {
+    width: 200px;
+}
+
+span.label {
+    height: 15px;
+    margin-top: 2px;
+}
+
+.code {
+    min-width: 70px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.name {
+    color: grey;
+    font-weight: bold;
+    margin-left: 2px;
+    width: 200px;
+    overflow-x: auto;
+}
+
+.action {
+    width: 20px;
+    cursor: pointer;
+}
+
+div.input-group {
+    margin-bottom: 20px;
+}
+
+span.input-group-addon {
+    min-width: 100px;
+}
