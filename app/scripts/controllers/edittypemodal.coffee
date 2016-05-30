@@ -24,6 +24,7 @@ angular.module('frontendApp')
         return (type in $scope.groups)
 
     $scope.save = () ->
+        $scope.type.type_id = $scope.selectedBase.id
         $http.put(
             SERVER_URL + "/task_types/" + $scope.type.id
             {"type": $scope.type}
@@ -32,7 +33,6 @@ angular.module('frontendApp')
                 $scope.$close()
             (error) ->
                 $scope.$close()
-                $scope.$parent.alert("The changes could not be saved", "danger")
         )
 
     return
