@@ -8,33 +8,17 @@
 </div>
 <div class="table">
     <div class="striped flex-container" ng-repeat="entityType in entityTypes">
-        <div ng-show="entityType.groupId == entityType.code" class="flex-container">
-            <span class="glyphicon glyphicon-folder-open"></span>
-            <span class="group-label">{{entityType.group}}</span>
-            <div class="indent"></div>
-            <span class="action glyphicon glyphicon-pencil" ng-click="editEntityType(entityType)"></span>
-            <span class="action glyphicon glyphicon-trash" ng-click="deleteEntityType(entityType)"></span>
-        </div>
-        <div ng-show="entityType.groupId != entityType.code" class="flex-container">
-            <div class="indent"></div>
-            <div class="type-label">{{entityType.label}}</div>
-            <span class="code label label-info">{{entityType.code}}</span>
-            <span class="name">{{entityType.name}}</span>
-            <span class="action glyphicon glyphicon-pencil" ng-click="editEntityType(entityType)"></span>
-            <span class="action glyphicon glyphicon-trash" ng-click="deleteEntityType(entityType)"></span>
-        </div>
+        <div class="type-label">{{entityType.label}}</div>
+        <span class="code label label-info">{{entityType.code}}</span>
+        <span class="name">{{entityType.name}}</span>
+        <span class="action glyphicon glyphicon-pencil" ng-click="editEntityType(entityType)"></span>
+        <span class="action glyphicon glyphicon-trash" ng-click="deleteEntityType(entityType)"></span>
     </div>
 </div>
 <a href="">
     <button class="btn btn-success" ng-click="addEntityType()">
         <span class="glyphicon glyphicon-plus"></span>
         Add Type
-    </button>
-</a>
-<a href="">
-    <button class="btn btn-default" ng-click="addBaseTypes()">
-        <span class="glyphicon glyphicon-book"></span>
-        Import Base Types
     </button>
 </a>
 
