@@ -50,5 +50,14 @@ angular.module('frontendApp')
                 task: $scope.task
                 baseTypes: $scope.baseTypes
 
+    $scope.addEntityType = () ->
+        $uibModal.open
+            templateUrl: 'views/_edit_type.html'
+            controller: 'AddTypeModalCtrl'
+            backdrop: true
+            resolve: args: () ->
+                task: $scope.task
+                baseTypes: $scope.baseTypes
+
 
     return
