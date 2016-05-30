@@ -58,6 +58,7 @@ angular.module('frontendApp')
             resolve: args: () ->
                 task: $scope.task
                 baseTypes: $scope.baseTypes
+                relation: false
 
 
     return
