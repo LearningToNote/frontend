@@ -6,7 +6,7 @@ angular.module('frontendApp')
     SERVER_URL = "https://#{location.hostname}:8080"
 
     $scope.type = {}
-    $scope.task = args.task
+    $scope.isRelation = args.relation
     $scope.baseTypes = []
     $scope.groups = []
     $scope.selectedBase = undefined
@@ -18,16 +18,16 @@ angular.module('frontendApp')
             $scope.baseTypes.push baseType
 
     $scope.save = () ->
-
+        return if not $scope.selectedBase or not $scope.type.label
+        $scope.type.type_id = $scope.selectedBase.id
         $http.put(
-            SERVER_URL + "/task_types/0"
-            {"type": $scope.type}
+            SERVER_URL + "/task_types/-1"
+            {"type": $scope.type, "relation": args.relation, "task": args.task}
         ).then(
             (success) ->
                 $scope.$close()
             (error) ->
                 $scope.$close()
-                $scope.$parent.alert("The new type could not be saved", "danger")
         )
 
     return
