@@ -60,5 +60,20 @@ angular.module('frontendApp')
                 baseTypes: $scope.baseTypes
                 relation: false
 
+    deleteFromArray = (item, array) ->
+        index = array.indexOf item
+        if index > -1
+            array.splice(index, 1)
+
+    $scope.deleteType = (type) ->
+        if confirm "Do you want to remove '#{type.label}'?"
+            $http.delete(SERVER_URL + "/task_types/" + type.id).then(
+                (success) ->
+                    deleteFromArray(type, $scope.entityTypes)
+                    deleteFromArray(type, $scope.relationTypes)
+                    $scope.$parent.alert("Deleted '#{type.label}'", "success")
+                (error) ->
+                    $scope.$parent.alert("An error occured.", "danger")
+            )
 
     return
