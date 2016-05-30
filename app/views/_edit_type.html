@@ -4,18 +4,19 @@
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span>
         </button>
-        <h4 class="modal-title">Edit Type</h4>
+        <h4 class="modal-title" ng-show="type.id">Edit Type</h4>
+        <h4 class="modal-title" ng-hide="type.id">Add Type</h4>
     </div>
     <div class="modal-body">
         <form>
             {{type}}
             <div class="input-group">
                 <span class="input-group-addon">Label</span>
-                <input type="text" class="form-control" ng-model="type.label">
+                <input type="text" required class="form-control" ng-model="type.label" ng-model-options="{ debounce: 500 }">
             </div>
             <div class="input-group">
                 <span class="input-group-addon">Based on</span>
-                <select class="form-control" ng-model="selectedBase"
+                <select class="form-control" ng-model="selectedBase" ng-required="!isGroup(type)"
                 ng-options="t.code + ' - ' + t.name for t in baseTypes track by t.code"></select>
             </div>
         </form>

@@ -33,14 +33,6 @@ button.btn {
     margin-right: 10px;
 }
 
-select.ng-invalid-required {
-    border: 1px red solid !important;
-}
-
-input.ng-invalid-required {
-    border: 1px red solid !important;
-}
-
 a.type-button {
     margin-left: 10px;
 }

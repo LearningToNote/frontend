@@ -41,3 +41,11 @@
 li.selected {
   font-weight: bold;
 }
+
+select.ng-invalid-required {
+    border: 1px red solid !important;
+}
+
+input.ng-invalid-required {
+    border: 1px red solid !important;
+}

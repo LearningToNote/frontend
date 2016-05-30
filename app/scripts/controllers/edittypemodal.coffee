@@ -20,17 +20,19 @@ angular.module('frontendApp')
         if baseType.code == $scope.type.code
             $scope.selectedBase = baseType
 
+    $scope.isGroup = (type) ->
+        return (type in $scope.groups)
 
     $scope.save = () ->
-        console.log SERVER_URL + "/task_types/" + $scope.type.id
         $http.put(
             SERVER_URL + "/task_types/" + $scope.type.id
             {"type": $scope.type}
         ).then(
             (success) ->
-                alert "yay"
+                $scope.$close()
             (error) ->
-                alert "nay"
+                $scope.$close()
+                $scope.$parent.alert("The changes could not be saved", "danger")
         )
 
     return
