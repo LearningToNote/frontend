@@ -9,7 +9,6 @@
     </div>
     <div class="modal-body">
         <form>
-            {{type}}
             <div class="input-group">
                 <span class="input-group-addon">Label</span>
                 <input type="text" required class="form-control" ng-model="type.label" ng-model-options="{ debounce: 500 }">
@@ -17,7 +16,7 @@
             <div class="input-group">
                 <span class="input-group-addon">Based on</span>
                 <select class="form-control" ng-model="selectedBase" ng-required="!isGroup(type)"
-                ng-options="t.code + ' - ' + t.name for t in baseTypes track by t.code"></select>
+                ng-options="t.code + ' - ' + t.group + ' - ' + t.name for t in baseTypes track by t.code"></select>
             </div>
         </form>
     </div>
