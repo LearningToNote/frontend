@@ -129,6 +129,7 @@ angular.module('frontendApp')
       $http.get(SERVER_URL + "/tasks").then(
         (response) ->
           $scope.tasks = response.data
+          $scope.documents = []
           $scope.files = ([] for i in [0..$scope.tasks.length])
           $scope.loading = false
           if $scope.tasks and $scope.tasks.length == 1
