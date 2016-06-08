@@ -11,15 +11,37 @@
         <div class="type-label">{{entityType.label}}</div>
         <span class="code label label-info">{{entityType.code}}</span>
         <span class="name">{{entityType.name}}</span>
-        <span class="action glyphicon glyphicon-pencil" ng-click="editEntityType(entityType)"></span>
+        <span class="action glyphicon glyphicon-pencil" ng-click="editType(entityType)"></span>
         <span class="action glyphicon glyphicon-trash" ng-click="deleteType(entityType)"></span>
     </div>
 </div>
 <a href="">
-    <button class="btn btn-success" ng-click="addEntityType()">
+    <button class="btn btn-success" ng-click="addType(false)">
         <span class="glyphicon glyphicon-plus"></span>
-        Add Type
+        Add Entity Type
     </button>
 </a>
 
 <h3>Relation Types</h3>
+
+<div ng-show="relationTypesLoading">
+  Loading...
+</div>
+<div ng-show="relationTypes.length == 0 && !relationTypesLoading">
+  There are no custom entity types defined for this task.
+</div>
+<div class="table">
+  <div class="striped flex-container" ng-repeat="relationType in relationTypes">
+    <div class="type-label">{{relationType.label}}</div>
+    <span class="code label label-info">{{relationType.code}}</span>
+    <span class="name">{{relationType.name}}</span>
+    <span class="action glyphicon glyphicon-pencil" ng-click="editType(relationType)"></span>
+    <span class="action glyphicon glyphicon-trash" ng-click="deleteType(relationType)"></span>
+  </div>
+</div>
+<a href="">
+  <button class="btn btn-success" ng-click="addType(true)">
+    <span class="glyphicon glyphicon-plus"></span>
+    Add Relation Type
+  </button>
+</a>
