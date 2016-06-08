@@ -1,4 +1,7 @@
-<span class="padded loading-message" ng-show="loading">Refreshing...</span>
+<span class="padded loading-message" ng-show="loading">
+  <img src="images/spinner.gif">
+  Refreshing...
+</span>
 <span class="padded loading-message" ng-show="!loading && allTasks.length == 0">There are no tasks.</span>
 <div class="tasks-list">
   <div class="padded flex-container">
