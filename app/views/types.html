@@ -1,30 +1,32 @@
 <h3>Entity Types</h3>
 
 <div ng-show="entityTypesLoading">
-    Loading...
+  <img src="images/spinner.gif">
+  Loading...
 </div>
 <div ng-show="entityTypes.length == 0 && !entityTypesLoading">
-    There are no custom entity types defined for this task.
+  There are no custom entity types defined for this task.
 </div>
 <div class="table">
-    <div class="striped flex-container" ng-repeat="entityType in entityTypes">
-        <div class="type-label">{{entityType.label}}</div>
-        <span class="code label label-info">{{entityType.code}}</span>
-        <span class="name">{{entityType.name}}</span>
-        <span class="action glyphicon glyphicon-pencil" ng-click="editType(entityType)"></span>
-        <span class="action glyphicon glyphicon-trash" ng-click="deleteType(entityType)"></span>
-    </div>
+  <div class="striped flex-container" ng-repeat="entityType in entityTypes">
+    <div class="type-label">{{entityType.label}}</div>
+    <span class="code label label-info">{{entityType.code}}</span>
+    <span class="name">{{entityType.name}}</span>
+    <span class="action glyphicon glyphicon-pencil" ng-click="editType(entityType)"></span>
+    <span class="action glyphicon glyphicon-trash" ng-click="deleteType(entityType)"></span>
+  </div>
 </div>
 <a href="">
-    <button class="btn btn-success" ng-click="addType(false)">
-        <span class="glyphicon glyphicon-plus"></span>
-        Add Entity Type
-    </button>
+  <button class="btn btn-success" ng-click="addType(false)">
+    <span class="glyphicon glyphicon-plus"></span>
+    Add Entity Type
+  </button>
 </a>
 
 <h3>Relation Types</h3>
 
 <div ng-show="relationTypesLoading">
+  <img src="images/spinner.gif">
   Loading...
 </div>
 <div ng-show="relationTypes.length == 0 && !relationTypesLoading">

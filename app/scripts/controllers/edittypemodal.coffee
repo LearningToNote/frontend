@@ -10,6 +10,7 @@ angular.module('frontendApp')
     $scope.baseTypes = []
     $scope.groups = []
     $scope.selectedBase = undefined
+    $scope.saving = false
 
     for baseType in args.baseTypes
         if baseType.groupId == baseType.code
@@ -24,6 +25,7 @@ angular.module('frontendApp')
         return (type in $scope.groups)
 
     $scope.save = () ->
+        $scope.saving = true
         $scope.type.type_id = $scope.selectedBase.id
         $http.put(
             SERVER_URL + "/task_types/" + $scope.type.id
