@@ -79,7 +79,10 @@ angular.module('frontendApp')
           uploadDocument('pubmed_' + $scope.expandedTask.pubmedId, response.data)
           $scope.pubmedId = undefined
         (error) ->
-          $scope.$parent.alert('There was a problem retrieving the document from PubMed. Is the ID correct?', 'danger')
+          if error.data and error.status
+            $scope.$parent.alert("An error occurred: '#{error.data}' (#{error.status}).", 'danger')
+          else
+            $scope.$parent.alert('There was a problem retrieving the document from PubMed.', 'danger')
       )
 
     $scope.predictDocument = (doc) ->
