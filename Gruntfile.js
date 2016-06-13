@@ -135,7 +135,7 @@ module.exports = function (grunt) {
             stdout: true,
             stderr: true
         },
-        command: 'python textae/server/server.py ../../<%= yeoman.dist %> NoDebug'
+        command: 'python textae/server/server.py ../../../<%= yeoman.dist %> NoDebug'
       }
     },
 
