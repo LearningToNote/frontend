@@ -1,9 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'EvaluationCtrl', ($scope, $http) ->
-
-    SERVER_URL = "https://#{location.hostname}:8080"
+  .controller 'EvaluationCtrl', ($scope, Middleware) ->
 
     $scope.tasks = []
     $scope.documents = []
@@ -19,23 +17,23 @@ angular.module('frontendApp')
     $scope.wrongType = undefined
     $scope.wrongTypeSum = undefined
 
-    $http.get(SERVER_URL + "/tasks")
+    Middleware.get("/tasks")
         .then (response) ->
             $scope.tasks = response.data
 
-    $http.get(SERVER_URL + "/users")
+    Middleware.get("/users")
         .then (response) ->
             $scope.users = response.data
 
     $scope.getDocuments = () ->
-        $http.get(SERVER_URL + "/tasks/" + $scope.task_id)
+        Middleware.get("/tasks/" + $scope.task_id)
             .then (response) ->
                 $scope.documents = response.data.documents
 
     $scope.evaluate = () ->
         $scope.results = undefined
-        $http(
-            url: SERVER_URL + "/evaluate"
+        Middleware(
+            url: "/evaluate"
             data:
                 user1: $scope.user1.id
                 user2: $scope.user2.id

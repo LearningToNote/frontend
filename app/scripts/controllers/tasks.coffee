@@ -1,9 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'TasksCtrl', ($scope, $http, Popup) ->
-
-    SERVER_URL = "https://#{location.hostname}:8080"
+  .controller 'TasksCtrl', ($scope, Popup, Middleware) ->
 
     $scope.expert_view = false
     $scope.loading = false
@@ -28,11 +26,11 @@ angular.module('frontendApp')
 
       req =
         method: 'POST'
-        url: SERVER_URL + '/tasks/' + task.task_id
+        url: '/tasks/' + task.task_id
         headers:
           'Content-Type': 'application/json'
         data: task
-      $http(req).then(
+      Middleware(req).then(
         (success) ->
           Popup.show("Update successful.", 'success', 5000)
           getTasks()
@@ -41,7 +39,7 @@ angular.module('frontendApp')
       )
 
     $scope.delete = (task) ->
-      $http.delete(SERVER_URL + '/tasks/' + task.task_id).then(
+      Middleware.delete('/tasks/' + task.task_id).then(
         (success) ->
           Popup.show("Task deleted.", 'success', 5000)
           getTasks()
@@ -54,7 +52,7 @@ angular.module('frontendApp')
 
     getTasks = () ->
       $scope.loading = true
-      $http.get(SERVER_URL + "/tasks").then(
+      Middleware.get("/tasks").then(
         (response) ->
           $scope.allTasks = response.data
           $scope.loading = false

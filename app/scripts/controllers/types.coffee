@@ -1,8 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-.controller 'TypesCtrl', ($scope, $routeParams, $http, $uibModal, Popup) ->
-  SERVER_URL = "https://#{location.hostname}:8080"
+.controller 'TypesCtrl', ($scope, $routeParams, Middleware, $uibModal, Popup) ->
 
   $scope.task = $routeParams.task_id
 
@@ -15,11 +14,11 @@ angular.module('frontendApp')
   $scope.relationTypesLoading = true
 
   init = () ->
-    $http.get(SERVER_URL + "/base_types").then(
+    Middleware.get("/base_types").then(
       (response) ->
         $scope.baseTypes = response.data
 
-        $http.get(SERVER_URL + "/tasks/#{$scope.task}/entity_types").then(
+        Middleware.get("/tasks/#{$scope.task}/entity_types").then(
           (response) ->
             $scope.entityTypes = response.data
             $scope.entityTypesLoading = false
@@ -28,7 +27,7 @@ angular.module('frontendApp')
             $scope.entityTypesLoading = false
         )
 
-        $http.get(SERVER_URL + "/tasks/#{$scope.task}/relation_types").then(
+        Middleware.get("/tasks/#{$scope.task}/relation_types").then(
           (response) ->
             $scope.relationTypes = response.data
             $scope.relationTypesLoading = false
@@ -73,7 +72,7 @@ angular.module('frontendApp')
 
   $scope.deleteType = (type) ->
     if confirm "Do you want to remove '#{type.label}'?"
-      $http.delete(SERVER_URL + "/task_types/" + type.id).then(
+      Middleware.delete("/task_types/" + type.id).then(
         (success) ->
           deleteFromArray(type, $scope.entityTypes)
           deleteFromArray(type, $scope.relationTypes)

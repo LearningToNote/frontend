@@ -1,11 +1,11 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'UsersCtrl', ($scope, $http) ->
+  .controller 'UsersCtrl', ($scope, Middleware) ->
 
     $scope.users = []
 
-    $http.get("https://#{location.hostname}:8080/users")
+    Middleware.get("/users")
         .then (response) ->
             $scope.users = response.data
 

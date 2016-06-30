@@ -1,9 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'EditTypeModalCtrl', ($scope, args, $http) ->
-
-    SERVER_URL = "https://#{location.hostname}:8080"
+  .controller 'EditTypeModalCtrl', ($scope, args, Middleware) ->
 
     $scope.type = args.type
     $scope.task = args.task
@@ -27,8 +25,8 @@ angular.module('frontendApp')
     $scope.save = () ->
         $scope.saving = true
         $scope.type.type_id = $scope.selectedBase.id
-        $http.put(
-            SERVER_URL + "/task_types/" + $scope.type.id
+        Middleware.put(
+            "/task_types/" + $scope.type.id
             {"type": $scope.type}
         ).then(
             (success) ->

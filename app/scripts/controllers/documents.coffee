@@ -1,9 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'DocumentsCtrl', ($scope, $http) ->
-
-    SERVER_URL = "https://#{location.hostname}:8080"
+  .controller 'DocumentsCtrl', ($scope, Middleware, Popup) ->
 
     $scope.tasks = []
     $scope.expandedTask = undefined
@@ -33,10 +31,10 @@ angular.module('frontendApp')
         getDocumentDetailsFor(doc)
 
     $scope.generateExportDocumentLinkFor = (doc) ->
-      return SERVER_URL + '/export/' + doc.document_id
+      return '/export/' + doc.document_id
 
     $scope.generateExportUserDocumentLinkFor = (userDocument) ->
-      return SERVER_URL + '/export/' + $scope.expandedDocument.document_id + '?user_id=' + userDocument.user_id
+      return '/export/' + $scope.expandedDocument.document_id + '?user_id=' + userDocument.user_id
 
     $scope.deleteUserDocument = (userDocument) ->
       if confirm("Are you sure that you want to delete all annotations " +
@@ -44,8 +42,8 @@ angular.module('frontendApp')
                   "This cannot be undone.")
         req =
           method: 'DELETE'
-          url: SERVER_URL + '/user_documents/' + userDocument.id
-        $http(req).then(
+          url: '/user_documents/' + userDocument.id
+        Middleware(req).then(
           (success) ->
             getDocumentDetailsFor($scope.expandedDocument)
             updateUserCountFor($scope.expandedDocument)
@@ -55,15 +53,14 @@ angular.module('frontendApp')
         )
 
     $scope.generateTextAELinkFor = (doc) ->
-      landingURL = "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}&tid=#{$scope.expandedTask.task_id}"
-      return SERVER_URL + landingURL
+      Middleware.SERVER_URL + "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}&tid=#{$scope.expandedTask.task_id}"
 
     $scope.deleteDocument = (doc) ->
       if confirm("Are you sure that you want to delete this document including all annotations? This cannot be undone.")
         req =
           method: 'DELETE'
-          url: SERVER_URL + '/documents/' + doc.document_id
-        $http(req).then(
+          url: '/documents/' + doc.document_id
+        Middleware(req).then(
           (success) ->
             getDetailsFor($scope.expandedTask)
             Popup.show("Document successfully deleted.", 'success', 5000)
@@ -77,7 +74,7 @@ angular.module('frontendApp')
       $scope.files[$scope.expandedTask.task_id] = []
 
     $scope.uploadFromPubmed = () ->
-      $http.get(SERVER_URL + '/pubmed/' + $scope.expandedTask.pubmedId).then(
+      Middleware.get('/pubmed/' + $scope.expandedTask.pubmedId).then(
         (response) ->
           uploadDocument('pubmed_' + $scope.expandedTask.pubmedId, response.data)
           $scope.pubmedId = undefined
@@ -91,13 +88,13 @@ angular.module('frontendApp')
     $scope.predictDocument = (doc) ->
       req =
         method: 'POST'
-        url: SERVER_URL + '/predict'
+        url: '/predict'
         headers:
           'Content-Type': 'application/json'
         data:
           'user_id': doc.user_id
           'document_id': doc.document_id
-      $http(req).then(
+      Middleware(req).then(
         (success) ->
           Popup.show("Predictions created.", 'success', 5000)
         (error) ->
@@ -112,12 +109,12 @@ angular.module('frontendApp')
       userDocument.visible = !userDocument.visible
       req =
         method: 'POST'
-        url: SERVER_URL + '/userdoc_visibility/' + document_id
+        url: '/userdoc_visibility/' + document_id
         headers:
           'Content-Type': 'application/json'
         data:
           'visible': userDocument.visible
-      $http(req).then(
+      Middleware(req).then(
         (success) ->
         (error) ->
           Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
@@ -132,7 +129,7 @@ angular.module('frontendApp')
 
     getTasks = () ->
       $scope.loading = true
-      $http.get(SERVER_URL + "/tasks").then(
+      Middleware.get("/tasks").then(
         (response) ->
           $scope.tasks = response.data
           $scope.documents = []
@@ -147,7 +144,7 @@ angular.module('frontendApp')
 
     getDetailsFor = (task) ->
       $scope.loading = true
-      $http.get(SERVER_URL + "/tasks/" + task.task_id).then(
+      Middleware.get("/tasks/" + task.task_id).then(
         (response) ->
           $scope.documents = response.data.documents
           $scope.loading = false
@@ -158,7 +155,7 @@ angular.module('frontendApp')
 
     getDocumentDetailsFor = (doc) ->
       $scope.loadingDocument = true
-      $http.get(SERVER_URL + "/user_documents_for/" + doc.document_id).then(
+      Middleware.get("/user_documents_for/" + doc.document_id).then(
         (response) ->
           $scope.userDocuments = response.data
           $scope.loadingDocument = false
@@ -181,7 +178,7 @@ angular.module('frontendApp')
         doc_type = 'bioc'
       req =
         method: 'POST'
-        url: SERVER_URL + '/import'
+        url: '/import'
         headers:
           'Content-Type': 'application/json'
         data:
@@ -190,7 +187,7 @@ angular.module('frontendApp')
           'text': content
           'visibility': 1
           'task': $scope.expandedTask.task_id
-      $http(req).then(
+      Middleware(req).then(
         (success) ->
           getDetailsFor($scope.expandedTask)
           $scope.$parent.clearAlerts()

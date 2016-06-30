@@ -1,9 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'AddTypeModalCtrl', ($scope, args, $http) ->
-
-    SERVER_URL = "https://#{location.hostname}:8080"
+  .controller 'AddTypeModalCtrl', ($scope, args, Middleware) ->
 
     $scope.type = {}
     $scope.isRelation = args.relation
@@ -22,8 +20,8 @@ angular.module('frontendApp')
         return if not $scope.selectedBase or not $scope.type.label
         $scope.saving = true
         $scope.type.type_id = $scope.selectedBase.id
-        $http.put(
-            SERVER_URL + "/task_types/-1"
+        Middleware.put(
+            "/task_types/-1"
             {"type": $scope.type, "relation": args.relation, "task": args.task}
         ).then(
             (success) ->

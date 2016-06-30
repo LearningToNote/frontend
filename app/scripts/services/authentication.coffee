@@ -1,20 +1,18 @@
 'use strict'
 
 angular.module('frontendApp')
-  .service 'Authentication', ($http, Session, $q) ->
+  .service 'Authentication', (Middleware, Session, $q) ->
     Authentication = {}
 
-    SERVER_URL = "https://#{location.hostname}:8080"
-
     Authentication.login = (credentials) ->
-      return $http
-        .post(SERVER_URL + "/login", credentials)
+      return Middleware
+        .post("/login", credentials)
         .then (res) ->
           Session.create(res.data.id, res.data.name, 'admin')
           return res.data
 
     Authentication.logout = () ->
-      $http.get(SERVER_URL + "/logout").then () ->
+      Middleware.get("/logout").then () ->
         Session.destroy()
 
     Authentication.isAuthenticated = () ->
@@ -22,7 +20,7 @@ angular.module('frontendApp')
       if !!Session.id
         deferred.resolve()
       else
-        $http.get(SERVER_URL + "/current_user")
+        Middleware.get("/current_user")
           .success (response) ->
             if response.id
               Session.create(response.id, response.name, 'admin')
