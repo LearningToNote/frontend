@@ -1,32 +1,21 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'ApplicationCtrl', ($scope, $rootScope, USER_ROLES, AUTH_EVENTS, Authentication, Session, $location) ->
+  .controller 'ApplicationCtrl', ($scope, $rootScope, USER_ROLES, AUTH_EVENTS, Authentication, Session, $location, Popup) ->
 
     $scope.session = Session
     $scope.userRoles = USER_ROLES
     $scope.isAuthorized = Authentication.isAuthorized
 
-    $scope.alerts = []
+    $scope.popup = Popup
 
     $rootScope.$on AUTH_EVENTS.loginFailed, (event, error) ->
-        $scope.alert("Error: #{error.data} (#{error.status})", "danger")
+        Popup.show("Error: #{error.data} (#{error.status})", "danger", 10000)
 
     $rootScope.$on AUTH_EVENTS.loginSuccess, (event) ->
-        $scope.alerts = []
-        $scope.alert("Welcome, #{$scope.session.name}!", "success")
-
-    $scope.alert = (message, level) ->
-        $scope.alerts.push {type: level, msg: message}
-
-    $scope.closeAlert = (index) ->
-        $scope.alerts.splice(index, 1)
-
-    $scope.clearAlerts = () ->
-        $scope.alerts = []
+        Popup.show("Welcome, #{$scope.session.name}!", "success", 5000)
 
     $scope.logout = () ->
-        $scope.alerts = []
         Authentication.logout()
         $location.url("/login")
 

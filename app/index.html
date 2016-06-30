@@ -57,7 +57,7 @@
 
 
     <div class="container">
-      <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+      <uib-alert ng-repeat="alert in popup.popups" type="{{alert.type}}" close="popup.close(alert.id)">{{alert.msg}}</uib-alert>
       <div ng-view=""></div>
     </div>
 
@@ -105,6 +105,7 @@
     <script src="scripts/controllers/types.js"></script>
     <script src="scripts/controllers/edittypemodal.js"></script>
     <script src="scripts/controllers/addtypemodal.js"></script>
+    <script src="scripts/services/popup.js"></script>
     <!-- endbuild -->
 </body>
 </html>

@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'TasksCtrl', ($scope, $http) ->
+  .controller 'TasksCtrl', ($scope, $http, Popup) ->
 
     SERVER_URL = "https://#{location.hostname}:8080"
 
@@ -34,19 +34,19 @@ angular.module('frontendApp')
         data: task
       $http(req).then(
         (success) ->
-          $scope.$parent.alert("Update successful.", 'success')
+          Popup.show("Update successful.", 'success', 5000)
           getTasks()
         (error) ->
-          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+          Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
       )
 
     $scope.delete = (task) ->
       $http.delete(SERVER_URL + '/tasks/' + task.task_id).then(
         (success) ->
-          $scope.$parent.alert("Task deleted.", 'success')
+          Popup.show("Task deleted.", 'success', 5000)
           getTasks()
         (error) ->
-          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+          Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
       )
 
     $scope.cancel = () ->
@@ -59,7 +59,7 @@ angular.module('frontendApp')
           $scope.allTasks = response.data
           $scope.loading = false
         (error) ->
-          $scope.$parent.alert("An error occured while fetching tasks.", "danger")
+          Popup.show("An error occured while fetching tasks.", "danger", 10000)
           $scope.loading = false
       )
 

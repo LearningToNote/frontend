@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-.controller 'TypesCtrl', ($scope, $routeParams, $http, $uibModal) ->
+.controller 'TypesCtrl', ($scope, $routeParams, $http, $uibModal, Popup) ->
   SERVER_URL = "https://#{location.hostname}:8080"
 
   $scope.task = $routeParams.task_id
@@ -24,7 +24,7 @@ angular.module('frontendApp')
             $scope.entityTypes = response.data
             $scope.entityTypesLoading = false
           (error) ->
-            $scope.$parent.alert("An error occured while fetching the entity types.", "danger")
+            Popup.show("An error occured while fetching the entity types.", "danger", 10000)
             $scope.entityTypesLoading = false
         )
 
@@ -33,11 +33,11 @@ angular.module('frontendApp')
             $scope.relationTypes = response.data
             $scope.relationTypesLoading = false
           (error) ->
-            $scope.$parent.alert("An error occured while fetching the relation types.", "danger")
+            Popup.show("An error occured while fetching the relation types.", "danger", 10000)
             $scope.relationTypesLoading = false
         )
       (error) ->
-        $scope.$parent.alert("An error occured while fetching the base types.", "danger")
+        Popup.show("An error occured while fetching the base types.", "danger", 10000)
     )
 
   $scope.editType = (type) ->
@@ -77,9 +77,9 @@ angular.module('frontendApp')
         (success) ->
           deleteFromArray(type, $scope.entityTypes)
           deleteFromArray(type, $scope.relationTypes)
-          $scope.$parent.alert("Deleted '#{type.label}'", "success")
+          Popup.show("Deleted '#{type.label}'", "success", 5000)
         (error) ->
-          $scope.$parent.alert("An error occured.", "danger")
+          Popup.show("An error occured.", "danger", 10000)
       )
 
   init()

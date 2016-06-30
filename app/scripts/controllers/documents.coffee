@@ -49,9 +49,9 @@ angular.module('frontendApp')
           (success) ->
             getDocumentDetailsFor($scope.expandedDocument)
             updateUserCountFor($scope.expandedDocument)
-            $scope.$parent.alert("Document successfully deleted.", 'success')
+            Popup.show("Document successfully deleted.", 'success', 5000)
           (error) ->
-            $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+            Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
         )
 
     $scope.generateTextAELinkFor = (doc) ->
@@ -66,9 +66,9 @@ angular.module('frontendApp')
         $http(req).then(
           (success) ->
             getDetailsFor($scope.expandedTask)
-            $scope.$parent.alert("Document successfully deleted.", 'success')
+            Popup.show("Document successfully deleted.", 'success', 5000)
           (error) ->
-            $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+            Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
         )
 
     $scope.upload = () ->
@@ -83,9 +83,9 @@ angular.module('frontendApp')
           $scope.pubmedId = undefined
         (error) ->
           if error.data and error.status
-            $scope.$parent.alert("An error occurred: '#{error.data}' (#{error.status}).", 'danger')
+            Popup.show("An error occurred: '#{error.data}' (#{error.status}).", 'danger', 10000)
           else
-            $scope.$parent.alert('There was a problem retrieving the document from PubMed.', 'danger')
+            Popup.show('There was a problem retrieving the document from PubMed.', 'danger', 10000)
       )
 
     $scope.predictDocument = (doc) ->
@@ -99,9 +99,9 @@ angular.module('frontendApp')
           'document_id': doc.document_id
       $http(req).then(
         (success) ->
-          $scope.$parent.alert("Predictions created.", 'success')
+          Popup.show("Predictions created.", 'success', 5000)
         (error) ->
-          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+          Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
       )
 
     $scope.addMoreDocuments = () ->
@@ -120,7 +120,7 @@ angular.module('frontendApp')
       $http(req).then(
         (success) ->
         (error) ->
-          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+          Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
           userDocument.visible = previousValue
       )
 
@@ -141,7 +141,7 @@ angular.module('frontendApp')
           if $scope.tasks and $scope.tasks.length == 1
             $scope.expandTask $scope.tasks[0]
         (error) ->
-          $scope.$parent.alert("An error occurred while fetching the tasks.", "danger")
+          Popup.show("An error occurred while fetching the tasks.", "danger", 10000)
           $scope.loading = false
       )
 
@@ -152,7 +152,7 @@ angular.module('frontendApp')
           $scope.documents = response.data.documents
           $scope.loading = false
         (error) ->
-          $scope.$parent.alert("An error occurred while fetching task details: \"#{error.data}\"", "danger")
+          Popup.show("An error occurred while fetching task details: \"#{error.data}\"", "danger", 10000)
           $scope.loading = false
       )
 
@@ -163,7 +163,7 @@ angular.module('frontendApp')
           $scope.userDocuments = response.data
           $scope.loadingDocument = false
         (error) ->
-          $scope.$parent.alert("An error occurred while fetching document details: \"#{error.data}\"", "danger")
+          Popup.show("An error occurred while fetching document details: \"#{error.data}\"", "danger", 10000)
           $scope.loadingDocument = false
       )
 
@@ -175,7 +175,7 @@ angular.module('frontendApp')
 
     uploadDocument = (name, content) ->
       $scope.$parent.clearAlerts()
-      $scope.$parent.alert("Uploading and importing #{name}...")
+      Popup.show("Uploading and importing #{name}...", 10000)
       doc_type = 'plaintext'
       if name.slice(-3) == 'xml'
         doc_type = 'bioc'
@@ -194,9 +194,9 @@ angular.module('frontendApp')
         (success) ->
           getDetailsFor($scope.expandedTask)
           $scope.$parent.clearAlerts()
-          $scope.$parent.alert("Successfully imported #{name}.", 'success')
+          Popup.show("Successfully imported #{name}.", 'success', 10000)
         (error) ->
-          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+          Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
       )
 
     getTasks()

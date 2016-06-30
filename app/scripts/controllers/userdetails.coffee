@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'UserDetailsCtrl', ($scope, $http, $routeParams) ->
+  .controller 'UserDetailsCtrl', ($scope, $http, $routeParams, Popup) ->
 
     SERVER_URL = "https://#{location.hostname}:8080"
 
@@ -19,7 +19,7 @@ angular.module('frontendApp')
             $scope.user.image = "images/user.png"
           $scope.loading = false
         (error) ->
-          $scope.$parent.alert("Error: #{error.data} (#{error.status})", 'danger')
+          Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
           $scope.loading = false
       )
 
