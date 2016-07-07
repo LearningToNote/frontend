@@ -71,7 +71,7 @@
                           title="Delete all annotations in this document made by {{userDocument.user_name}}">
                           <span class="glyphicon glyphicon-trash"></span>
                         </a>
-                        <a href="" ng-click="toggleDocumentVisibility(document.document_id, userDocument)" ng-show="userDocument.from_current_user"
+                        <a href="" ng-click="toggleDocumentVisibility(userDocument)" ng-show="userDocument.user_id==session.id"
                         title="Determine whether this document is visible to other users and can be used to improve prediction.">
                           <span ng-class="getVisibilityToggleClassFor(userDocument)"></span>
                         </a>

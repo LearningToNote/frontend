@@ -1,7 +1,9 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'DocumentsCtrl', ($scope, Middleware, Popup) ->
+  .controller 'DocumentsCtrl', ($scope, Middleware, Popup, Session) ->
+
+    $scope.session = Session
 
     $scope.tasks = []
     $scope.expandedTask = undefined
@@ -104,12 +106,12 @@ angular.module('frontendApp')
     $scope.addMoreDocuments = () ->
       $scope.documentCount += 2
 
-    $scope.toggleDocumentVisibility = (document_id, userDocument) ->
+    $scope.toggleDocumentVisibility = (userDocument) ->
       previousValue = userDocument.visible
       userDocument.visible = !userDocument.visible
       req =
         method: 'POST'
-        url: '/userdoc_visibility/' + document_id
+        url: '/userdoc_visibility/' + userDocument.id
         headers:
           'Content-Type': 'application/json'
         data:
