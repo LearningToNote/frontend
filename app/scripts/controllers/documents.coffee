@@ -33,10 +33,10 @@ angular.module('frontendApp')
         getDocumentDetailsFor(doc)
 
     $scope.generateExportDocumentLinkFor = (doc) ->
-      return '/export/' + doc.document_id
+      return Middleware.SERVER_URL + '/export/' + doc.document_id
 
     $scope.generateExportUserDocumentLinkFor = (userDocument) ->
-      return '/export/' + $scope.expandedDocument.document_id + '?user_id=' + userDocument.user_id
+      return Middleware.SERVER_URL + '/export/' + $scope.expandedDocument.document_id + '?user_id=' + userDocument.user_id
 
     $scope.deleteUserDocument = (userDocument) ->
       if confirm("Are you sure that you want to delete all annotations " +
