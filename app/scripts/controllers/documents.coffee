@@ -173,7 +173,6 @@ angular.module('frontendApp')
           break
 
     uploadDocument = (name, content) ->
-      $scope.$parent.clearAlerts()
       Popup.show("Uploading and importing #{name}...", 10000)
       doc_type = 'plaintext'
       if name.slice(-3) == 'xml'
@@ -192,7 +191,6 @@ angular.module('frontendApp')
       Middleware(req).then(
         (success) ->
           getDetailsFor($scope.expandedTask)
-          $scope.$parent.clearAlerts()
           Popup.show("Successfully imported #{name}.", 'success', 10000)
         (error) ->
           Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
