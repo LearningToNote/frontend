@@ -72,6 +72,7 @@ input.upload-input {
 
 a.action {
     margin-left: 10px;
+    cursor: pointer;
 }
 
 span.glyphicon-user {
