@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('frontendApp')
-  .controller 'DocumentsCtrl', ($scope, Middleware, Popup, Session) ->
+  .controller 'DocumentsCtrl', ($scope, $location, Middleware, Popup, Session) ->
 
     $scope.session = Session
 
@@ -54,9 +54,17 @@ angular.module('frontendApp')
             Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
         )
 
-    $scope.generateTextAELinkFor = (doc) ->
-      Middleware.SERVER_URL + "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}&tid=#{$scope.expandedTask.task_id}"
-
+    $scope.edit = (doc) ->
+      Middleware.get("/documents/#{doc.document_id}/check").then(
+        (response) ->
+          if response and response.data.length > 0
+            Popup.show("There are unspecified types in this document. Please add UMLS matchings to proceed.", 'warning', 10000)
+            $location.path("/types/#{$scope.expandedTask.task_id}")
+          else
+            window.location = Middleware.SERVER_URL + "/dist/textae/textae.html?mode=edit&hana-document=#{doc.document_id}&tid=#{$scope.expandedTask.task_id}"
+        (error) ->
+          Popup.show("An error occured while checking the document. Please retry.", 'danger', 10000)
+      )
     $scope.deleteDocument = (doc) ->
       if confirm("Are you sure that you want to delete this document including all annotations? This cannot be undone.")
         req =
@@ -85,22 +93,6 @@ angular.module('frontendApp')
             Popup.show("An error occurred: '#{error.data}' (#{error.status}).", 'danger', 10000)
           else
             Popup.show('There was a problem retrieving the document from PubMed.', 'danger', 10000)
-      )
-
-    $scope.predictDocument = (doc) ->
-      req =
-        method: 'POST'
-        url: '/predict'
-        headers:
-          'Content-Type': 'application/json'
-        data:
-          'user_id': doc.user_id
-          'document_id': doc.document_id
-      Middleware(req).then(
-        (success) ->
-          Popup.show("Predictions created.", 'success', 5000)
-        (error) ->
-          Popup.show("Error: #{error.data} (#{error.status})", 'danger', 10000)
       )
 
     $scope.addMoreDocuments = () ->
@@ -173,7 +165,7 @@ angular.module('frontendApp')
           break
 
     uploadDocument = (name, content) ->
-      Popup.show("Uploading and importing #{name}...", 10000)
+      Popup.show("Uploading and importing #{name}...", 'info', 10000)
       doc_type = 'plaintext'
       if name.slice(-3) == 'xml'
         doc_type = 'bioc'
